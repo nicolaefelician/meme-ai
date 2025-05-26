@@ -1,0 +1,117 @@
+import SwiftUI
+
+struct CoinPriceChart: View {
+    let priceList: [Double]
+    let minY: Double
+    let maxY: Double
+    let lineColor: Color
+    
+    private struct Line: Shape{
+        func path(in rect: CGRect) -> Path {
+            var path = Path()
+            path.move(to: CGPoint(x: 0, y: 0))
+            path.addLine(to: CGPoint(x: 0, y: rect.height))
+            return path
+        }
+    }
+    
+    @State private var offset: CGSize = .zero
+    @State private var showPlot = false
+    @State private var translation: CGFloat = 0
+    
+    @Binding private var trimValue: CGFloat
+    @Binding private var selectedPrice: Double
+    
+    init(priceList: [Double], trimValue: Binding<CGFloat>, selectedPrice: Binding<Double>, priceChange: Double) {
+        self.priceList = priceList
+        self.maxY = priceList.max() ?? 0
+        self.minY = priceList.min() ?? 0
+        self.lineColor = priceChange < 0 ? .red : .green
+        self._trimValue = trimValue
+        self._selectedPrice = selectedPrice
+    }
+    
+    var body: some View {
+        GeometryReader { geometry in
+            if priceList.isEmpty {
+                Text("No available data for this coin")
+                    .foregroundColor(.gray)
+                    .font(.custom(TextFonts.interSemibold.rawValue, size: 17))
+                    .multilineTextAlignment(.center)
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+            } else {
+                let totalPoints = max(priceList.count, 2)
+                let width = geometry.size.width / CGFloat(totalPoints - 1)
+                let height = geometry.size.height
+                
+                let points = priceList.enumerated().map { index, value in
+                    let x = width * CGFloat(index)
+                    let y = (1 - CGFloat((value - minY) / (maxY - minY))) * height
+                    return CGPoint(x: x, y: y)
+                }
+                
+                Path { path in
+                    guard let firstPoint = points.first else { return }
+                    path.move(to: firstPoint)
+                    
+                    for point in points {
+                        path.addLine(to: point)
+                    }
+                }
+                .trim(from: 0, to: trimValue)
+                .stroke(lineColor, style: StrokeStyle(lineWidth: 2.5, lineCap: .round, lineJoin: .round))
+                .onAppear {
+                    selectedPrice = priceList.last ?? 0
+                    withAnimation(.linear(duration: 1.5)) {
+                        trimValue = 1
+                    }
+                }
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .background(Consts.shared.backgroundColor)
+                .overlay {
+                    ZStack {
+                        Line()
+                            .stroke(style: .init(dash: [5]))
+                            .foregroundStyle(.gray)
+                            .frame(width: 1)
+                        
+                        Circle()
+                            .frame(width: 10, height: 10)
+                            .foregroundStyle(lineColor)
+                            .background(
+                                Circle()
+                                    .fill(Color.black.opacity(0.6))
+                                    .blur(radius: 1)
+                            )
+                            .overlay(
+                                Circle()
+                                    .stroke(Color.white.opacity(0.8), lineWidth: 1)
+                            )
+                            .shadow(color: lineColor.opacity(0.5), radius: 4, x: 0, y: 2)
+                            .offset(y: offset.height)
+                    }
+                    .offset(x: offset.width)
+                    .opacity(showPlot ? 1 : 0)
+                }
+                .gesture(DragGesture().onChanged { value in
+                    let index = max(min(Int((value.location.x / width).rounded()), priceList.count - 1), 0)
+                    
+                    withAnimation {
+                        selectedPrice = priceList[index]
+                        showPlot = true
+                    }
+                    
+                    offset = CGSize(
+                        width: points[index].x - (geometry.size.width / 2),
+                        height: points[index].y - height / 2
+                    )
+                }.onEnded { _ in
+                    withAnimation {
+                        showPlot = false
+                        selectedPrice = priceList.last ?? 0
+                    }
+                })
+            }
+        }
+    }
+}
