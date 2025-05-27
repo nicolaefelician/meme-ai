@@ -1,4 +1,5 @@
 import SwiftUI
+import SuperwallKit
 
 struct NewsListView: View {
     @ObservedObject private var appManager = AppManager.shared
@@ -28,8 +29,13 @@ struct NewsListView: View {
     
     private func buildNewsCard(news: NewsPreview) -> some View {
         return Button(action: {
-            impactFeedback.impactOccurred()
-            appManager.path.append(.newsDataView(newsId: news.id))
+            if appManager.isPremiumUser {
+                impactFeedback.impactOccurred()
+                appManager.path.append(.newsDataView(newsId: news.id))
+            } else {
+                Superwall.shared.register(placement: "campaign_trigger")
+            }
+            
         }) {
             VStack(alignment: .leading, spacing: 13) {
                 Divider()

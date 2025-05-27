@@ -1,7 +1,7 @@
 import SwiftUI
 import Combine
 
-class AiChatViewModel: ObservableObject {
+final class AiChatViewModel: ObservableObject {
     @Published var inputText: String = ""
     @Published var isInteracting: Bool = false
     @Published var messages: [ChatMessage] = []
@@ -84,12 +84,14 @@ class AiChatViewModel: ObservableObject {
         let imagesList = uploadedImages.map { image in
             return Utilities.shared.convertImageToBase64(image: image) ?? ""
         }
+        
+        let history = self.messages
         let messageRow = ChatMessage(isInteracting: true, sendText: text, responseImage: "small-icon", responseText: streamText, uploadedImages: self.uploadedImages)
         self.messages.append(messageRow)
         self.uploadedImages.removeAll()
         
         do {
-            let stream = try await CoinAnalysisApi.shared.fetchChatResponse(text, images: imagesList)
+            let stream = try await CoinAnalysisApi.shared.fetchChatResponse(text, history: history, images: imagesList)
             for try await text in stream {
                 streamText += text
                 messageRow.responseText = streamText.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -99,7 +101,6 @@ class AiChatViewModel: ObservableObject {
             messageRow.responseError = error.localizedDescription
         }
         
-        //        AppProvider.shared.chatHistoryList.append(messageRow)
         messageRow.isInteracting = false
         self.messages[self.messages.count - 1] = messageRow
         isInteracting = false
@@ -140,7 +141,7 @@ struct AiChatView: View {
                                     .multilineTextAlignment(.center)
                                     .padding(.horizontal, 40)
                             }
-                            .padding(.top, isTextFieldFocused ? 60 : 180)
+                            .padding(.top, isTextFieldFocused ? 60 : 200)
                             .animation(.easeOut, value: isTextFieldFocused)
                         } else {
                             ForEach(viewModel.messages, id: \.id) { message in

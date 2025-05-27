@@ -1,6 +1,6 @@
 import Foundation
 
-class CoinDataApi {
+final class CoinDataApi {
     static let shared = CoinDataApi()
     
     private init() {}

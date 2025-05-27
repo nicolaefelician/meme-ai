@@ -7,7 +7,9 @@ final class NewsDataViewModel: ObservableObject {
 struct NewsDataView: View {
     let id: String
     
-    @StateObject private var viewModel = NewsDataViewModel()
+    @StateObject private var viewModel: NewsDataViewModel = NewsDataViewModel()
+    @State private var showWebView = false
+    
     private let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
     
     private func buildSentimentCard(sentiment: String) -> some View {
@@ -90,6 +92,9 @@ struct NewsDataView: View {
                     
                     Button(action: {
                         impactFeedback.impactOccurred()
+                        if let url = URL(string: data.url) {
+                            showWebView = true
+                        }
                     }) {
                         Text("Read Full Article")
                             .foregroundStyle(.white)
@@ -105,6 +110,11 @@ struct NewsDataView: View {
                             .padding(.bottom, 23)
                     }
                 }
+            }
+        }
+        .fullScreenCover(isPresented: $showWebView) {
+            if let data = viewModel.newsData, let url = URL(string: data.url) {
+                ArticleWebView(url: url)
             }
         }
     }

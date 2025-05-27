@@ -1,5 +1,6 @@
 import SwiftUI
 import Combine
+import SuperwallKit
 
 final class SearchCoinViewModel: ObservableObject {
     @Published var inputText: String = ""
@@ -48,8 +49,12 @@ struct SearchCoinView: View {
                                 .padding(.leading, 40)
                             
                             Button(action: {
-                                viewModel.impactFeedback.impactOccurred()
-                                appManager.path.append(.coinDataView(coinId: coin.id))
+                                if appManager.isPremiumUser {
+                                    viewModel.impactFeedback.impactOccurred()
+                                    appManager.path.append(.coinDataView(coinId: coin.id))
+                                } else {
+                                    Superwall.shared.register(placement: "campaign_trigger")
+                                }
                             }) {
                                 CoinCard(coin: coin, selectedTimeRange: .oneHour, selectedCategory: .gainers)
                             }

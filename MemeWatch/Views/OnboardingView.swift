@@ -1,4 +1,5 @@
 import SwiftUI
+import SuperwallKit
 
 struct OnboardingView: View {
     private struct OnboardingInfo {
@@ -12,6 +13,8 @@ struct OnboardingView: View {
                                                      OnboardingInfo(title: "Analyze Meme Coins with Ease", description: "With MemeAI analyzing meme coins is simple and effective. Just upload an image of the chart, of snap a picture of it using your phone. It’s that easy!", image: "onboarding2", buttonText: "Continue"), OnboardingInfo(title: "Get Informed at any Moment", description: "Our real-time analysis keeps you uptaded with market movements, helping you make informed decisions.", image: "onboarding3", buttonText: "Get Started")]
     @State private var currentOnboardingIndex = 0
     private let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
+    
+    @Environment(\.requestReview) var requestReview
     
     @ObservedObject private var appManager = AppManager.shared
     
@@ -45,7 +48,9 @@ struct OnboardingView: View {
                 impactFeedback.impactOccurred()
                 if currentOnboardingIndex == onboardingInfos.count - 1 {
                     withAnimation {
+                        requestReview()
                         appManager.completedOnboarding()
+                        Superwall.shared.register(placement: "campaign_trigger")
                     }
                 } else {
                     withAnimation {

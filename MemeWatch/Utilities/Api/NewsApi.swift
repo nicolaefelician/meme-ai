@@ -1,12 +1,12 @@
 import Foundation
 
-class NewsApi {
+final class NewsApi {
     static let shared = NewsApi()
     
     private init() {}
     
     func fetchNewsPreviews() async {
-        guard let url = URL(string: "https://center.codbun.com/api/news/list") else { return }
+        guard let url = URL(string: "https://center.tocaas.com/api/news/list") else { return }
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -25,7 +25,7 @@ class NewsApi {
     }
     
     func getNewsData(id: String) async -> NewsData? {
-        guard let url = URL(string: "https://center.codbun.com/api/news/\(id)") else { return nil }
+        guard let url = URL(string: "https://center.tocaas.com/api/news/\(id)") else { return nil }
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"

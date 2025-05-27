@@ -1,6 +1,6 @@
 import SwiftUI
 
-class CoinDataViewModel: ObservableObject {
+final class CoinDataViewModel: ObservableObject {
     @Published var coinData: CoinData?
     
     @Published var priceData: [Double] = []

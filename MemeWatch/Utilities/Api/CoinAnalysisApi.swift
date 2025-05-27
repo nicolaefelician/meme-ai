@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-class CoinAnalysisApi {
+final class CoinAnalysisApi {
     static let shared = CoinAnalysisApi()
     
     private init() {}
@@ -67,8 +67,8 @@ class CoinAnalysisApi {
                     }
         """
     
-    private func cleanResponseMessage(_ text: String) -> String {
-        var cleanedText = text
+    private func cleanResponse(_ response: String) -> String {
+        var cleanedText = response
         
         cleanedText = cleanedText.replacingOccurrences(of: "\\*\\*(.*?)\\*\\*", with: "$1", options: .regularExpression)
         cleanedText = cleanedText.replacingOccurrences(of: "\\*(.*?)\\*", with: "$1", options: .regularExpression)
@@ -108,13 +108,8 @@ class CoinAnalysisApi {
         }
     }
     
-    func fetchChatResponse(_ input: String, images: [String]) async throws -> AsyncThrowingStream<String, Error> {
-        let url = URL(string: "https://api.openai.com/v1/chat/completions")!
-        
-        let headers = [
-            "Content-Type": "application/json",
-            "Authorization": "Bearer \(Consts.shared.openAiApiKey)"
-        ]
+    func fetchChatResponse(_ input: String, history: [ChatMessage], images: [String]) async throws -> AsyncThrowingStream<String, Error> {
+        guard let url = URL(string: "https://center.tocaas.com/api/chat/chat") else { throw URLError(.badURL) }
         
         var messages: [[String: Any]] = [
             [
@@ -122,6 +117,17 @@ class CoinAnalysisApi {
                 "content": systemPrompt
             ]
         ]
+        
+        history.forEach { chatHistory in
+            messages.append([
+                "role": "user",
+                "content": chatHistory.sendText
+            ])
+            messages.append([
+                "role": "developer",
+                "content": chatHistory.responseText ?? ""
+            ])
+        }
         
         var userMessageContent: [[String: Any]] = [
             ["type": "text", "text": input],
@@ -140,7 +146,6 @@ class CoinAnalysisApi {
         
         let requestBody: [String: Any] = [
             "model": "gpt-4o-mini",
-            "max_tokens": 1024,
             "messages": messages,
             "stop": [
                 "\n\n\n",
@@ -151,25 +156,28 @@ class CoinAnalysisApi {
         
         var request = URLRequest(url: url)
         
-        headers.forEach { request.setValue($1, forHTTPHeaderField: $0) }
         request.httpMethod = "POST"
         
         guard let jsonData = try? JSONSerialization.data(withJSONObject: requestBody, options: []) else {
             print("Error: Unable to serialize JSON")
-            throw ChatMessageError.invalidJson
+            throw ApiError.encodingFailded
         }
         request.httpBody = jsonData
         
-        let (result, response) = try await safeSession().bytes(for: request)
+        let (result, response) = try await URLSession.shared.bytes(for: request)
+        
+        if let httpResponse = response as? HTTPURLResponse {
+            print("HTTP Status Code:", httpResponse.statusCode)
+        } else {
+            print("Invalid response")
+        }
         
         guard let httpResponse = response as? HTTPURLResponse else {
-            print("Error: Invalid Http Response")
-            throw ChatMessageError.invalidHttpResponse(statusCode: nil)
+            throw ApiError.invalidResponse
         }
         
         guard 200...299 ~= httpResponse.statusCode else {
-            print("Error: Invalid Http Response: \(httpResponse.statusCode)")
-            throw ChatMessageError.invalidHttpResponse(statusCode: httpResponse.statusCode)
+            throw ApiError.invalidResponse
         }
         
         return AsyncThrowingStream<String, Error> { continuation in
@@ -177,7 +185,7 @@ class CoinAnalysisApi {
                 do {
                     for try await line in result.lines {
                         if line.hasPrefix("data: "), let data = line.dropFirst(6).data(using: .utf8), let response = try? JSONDecoder().decode(ChatMessageApiResponse.self, from: data), let text = response.choices.first?.delta.content {
-                            continuation.yield(cleanResponseMessage(text))
+                            continuation.yield(cleanResponse(text))
                         }
                     }
                     continuation.finish()

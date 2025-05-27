@@ -1,4 +1,5 @@
 import SwiftUI
+import SuperwallKit
 
 final class HomeViewModel: ObservableObject {
     @Published var selectedTimeRange: TimeRange = .oneHour
@@ -136,8 +137,12 @@ struct HomeView: View {
                             LazyHStack(spacing: 20) {
                                 ForEach(appManager.losersCoinsList, id: \.self) { coin in
                                     Button(action: {
-                                        viewModel.impactFeedback.impactOccurred()
-                                        appManager.path.append(.coinDataView(coinId: coin.id))
+                                        if appManager.isPremiumUser {
+                                            viewModel.impactFeedback.impactOccurred()
+                                            appManager.path.append(.coinDataView(coinId: coin.id))
+                                        } else {
+                                            Superwall.shared.register(placement: "campaign_trigger")
+                                        }
                                     }) {
                                         buildCoinHorizontalCard(coin: coin)
                                     }
@@ -267,8 +272,12 @@ struct HomeView: View {
                                     .foregroundStyle(.gray)
                                     .padding(.leading, 40)
                                 Button(action: {
-                                    viewModel.impactFeedback.impactOccurred()
-                                    appManager.path.append(.coinDataView(coinId: coin.id))
+                                    if appManager.isPremiumUser {
+                                        viewModel.impactFeedback.impactOccurred()
+                                        appManager.path.append(.coinDataView(coinId: coin.id))
+                                    } else {
+                                        Superwall.shared.register(placement: "campaign_trigger")
+                                    }
                                 }) {
                                     CoinCard(coin: coin, selectedTimeRange: viewModel.selectedTimeRange, selectedCategory: viewModel.selctedCoinCategory)
                                 }

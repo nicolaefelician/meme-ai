@@ -68,6 +68,9 @@ struct SplashView: View {
                 await refreshData()
             }
         }
+        .task {
+            AnalyticsManager.shared.logEvent(name: "app_launch")
+        }
     }
     
     func refreshData() async {

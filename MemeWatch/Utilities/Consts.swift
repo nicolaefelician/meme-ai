@@ -1,4 +1,5 @@
 import SwiftUI
+import RevenueCat
 
 final class Consts {
     private init() {}
@@ -8,9 +9,18 @@ final class Consts {
     let backgroundColor: Color = Color(hex: "#FFFFFF")
     let cardColor: Color = Color(hex: "#e7e7e7")
     
-    let revenueCatApiKey: String = ""
-    let superwallApiKey: String = ""
-    let openAiApiKey: String = "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"
+    let revenueCatApiKey: String = "appl_LLBLyrAeBElmNCSAceowEYvAEvB"
+    let superwallApiKey: String = "pk_2e4bce9df65c721b1f9630fe0921ad3c1a8b686a1245ea0d"
+    
+    let appCode = "meme-ai"
+    let appVersion = "1.0.0"
+    let firebaseTokenId = ""
+    
+    let openAiApiKey = "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"
+    
+    func loadContent() {
+        AppManager.shared.showOnboarding = !UserDefaults.standard.bool(forKey: "hasShownOnboarding")
+    }
 }
 
 enum NavigationView: Hashable {
@@ -70,7 +80,7 @@ extension Color {
         default:
             (a, r, g, b) = (1, 1, 1, 0)
         }
-
+        
         self.init(
             .sRGB,
             red: Double(r) / 255,

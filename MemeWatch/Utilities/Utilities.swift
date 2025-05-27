@@ -57,6 +57,12 @@ final class Utilities {
     }
 }
 
+enum ApiError: Error {
+    case invalidResponse
+    case decodingFailded
+    case encodingFailded
+}
+
 func safeSession() -> URLSession {
     if #available(iOS 18.4, *) {
         let config = URLSessionConfiguration.ephemeral

@@ -1,4 +1,5 @@
 import Combine
+import SwiftUI
 
 final class AppManager: ObservableObject {
     private init() {}
@@ -7,7 +8,7 @@ final class AppManager: ObservableObject {
     
     @Published var path: [NavigationView] = []
     
-    @Published var showOnboarding: Bool = true
+    @Published var showOnboarding: Bool = false
     @Published var showSplashView: Bool = true
     
     @Published var gainersCoinsList: [Coin] = []
@@ -30,5 +31,6 @@ final class AppManager: ObservableObject {
     
     func completedOnboarding() {
         showOnboarding = false
+        UserDefaults.standard.set(true, forKey: "hasShownOnboarding")
     }
 }

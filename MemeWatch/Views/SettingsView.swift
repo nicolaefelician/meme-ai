@@ -17,9 +17,7 @@ struct SettingsView: View {
                     settingButton(icon: "square.and.arrow.up", title: "Share App") {
                         isSharing = true
                     }
-                    settingButton(icon: "envelope", title: "Contact us") {
-                        openMail()
-                    }
+                    
                     settingButton(icon: "hand.thumbsup", title: "Rate us") {
                         requestReview()
                     }
@@ -27,27 +25,26 @@ struct SettingsView: View {
                     Divider().background(Color.gray.opacity(0.4)).padding(.horizontal, 20)
                     
                     sectionHeader(title: "Support")
-                    settingButton(icon: "person.2.fill", title: "Follow us") {
-                        openURL("https://www.google.com")
-                    }
-                    settingButton(icon: "info.circle", title: "About us") {
-                        openURL("https://www.google.com")
-                    }
                     settingButton(icon: "app.badge", title: "Our Apps") {
-                        openURL("https://www.google.com")
+                        openURL("https://apps.tocaas.com/")
+                    }
+                    
+                    settingButton(icon: "envelope", title: "Contact us") {
+                        openMail()
                     }
                     
                     Divider().background(Color.gray.opacity(0.4)).padding(.horizontal, 20)
                     
                     sectionHeader(title: "Legal")
-                    settingButton(icon: "dollarsign.arrow.circlepath", title: "Restore Purchase") {}
+                    settingButton(icon: "dollarsign.arrow.circlepath", title: "Restore Purchase") {
+                        restorePurchases()
+                    }
                     settingButton(icon: "lock.shield", title: "Privacy Policy") {
-                        openURL("https://www.google.com")
+                        openURL("https://apps.tocaas.com/meme-ai/privacy-policy")
                     }
                     settingButton(icon: "doc.text", title: "Terms of Use") {
-                        openURL("https://www.google.com")
+                        openURL("https://apps.tocaas.com/meme-ai/terms-of-use")
                     }
-                    settingButton(icon: "creditcard.fill", title: "Manage Subscription") {}
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 10)
@@ -55,6 +52,18 @@ struct SettingsView: View {
             }
         }
         .preferredColorScheme(.light)
+    }
+    
+    private func restorePurchases() {
+        Task {
+            let result = await purchaseController.restorePurchases()
+            switch result {
+            case .restored:
+                print("✅ Purchases restored")
+            case .failed(let error):
+                print("❌ Failed to restore purchases: \(String(describing: error?.localizedDescription))")
+            }
+        }
     }
     
     @ViewBuilder
@@ -98,7 +107,7 @@ struct SettingsView: View {
     }
     
     private func openMail() {
-        let email = "support@example.com"
+        let email = "Dev1@pileus.solutions"
         let subject = "Support Request"
         let body = "Hi, I need help with..."
         let mailtoURL = "mailto:\(email)?subject=\(subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")&body=\(body.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"

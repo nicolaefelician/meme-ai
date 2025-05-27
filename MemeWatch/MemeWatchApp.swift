@@ -8,10 +8,17 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
-        Purchases.logLevel = .info
+        Consts.shared.loadContent()
+        
+        Purchases.logLevel = .debug
         Purchases.configure(withAPIKey: Consts.shared.revenueCatApiKey)
         
+        Purchases.shared.getCustomerInfo { (customerInfo, error) in
+            AppManager.shared.isPremiumUser = customerInfo?.entitlements.all["Pro"]?.isActive == true
+        }
+        
         Superwall.configure(apiKey: Consts.shared.superwallApiKey, purchaseController: purchaseController)
+        
         purchaseController.syncSubscriptionStatus()
         
         UNUserNotificationCenter.current().delegate = self
@@ -42,6 +49,8 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct MemeWatchApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
     @ObservedObject private var appManager = AppManager.shared
     
     var body: some Scene {
@@ -93,8 +102,14 @@ extension AppDelegate: MessagingDelegate {
             return
         }
         
-        // TODO: register user
-//        Consts.shared.setFcmToken(fcmToken)
+        Task {
+            do {
+                try await UserApi.shared.registerUser(firebaseId: fcmToken)
+                print("User was successfully registered")
+            } catch {
+                print("Failed to register user: \(error)")
+            }
+        }
         
         let dataDict: [String: String] = ["token": fcmToken]
         

@@ -1,5 +1,6 @@
 import SwiftUI
 import Combine
+import SuperwallKit
 
 final class ContentViewModel: ObservableObject {
     @Published var selectedTabIndex: Int = 0
@@ -102,15 +103,17 @@ struct ContentView: View {
                 .navigationTitle(getViewTitle(for: viewModel.selectedTabIndex))
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button(action: {
-                            
-                        }) {
-                            Image(systemName: "crown.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 30, height: 30)
-                                .foregroundStyle(.yellow)
+                    if !appManager.isPremiumUser {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Button(action: {
+                                Superwall.shared.register(placement: "campaign_trigger")
+                            }) {
+                                Image(systemName: "crown.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 30, height: 30)
+                                    .foregroundStyle(.yellow)
+                            }
                         }
                     }
                     
