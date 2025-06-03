@@ -6,6 +6,8 @@ struct SettingsView: View {
     @Environment(\.requestReview) var requestReview
     @ObservedObject private var appManager = AppManager.shared
     
+    private let appStoreLink = "https://apps.apple.com/us/app/meme-coin-tracker-dex-crypto/id6746212315?platform=iphone"
+    
     var body: some View {
         ZStack {
             Color.white
@@ -52,6 +54,14 @@ struct SettingsView: View {
             }
         }
         .preferredColorScheme(.light)
+        .sheet(isPresented: $isSharing) {
+            if let url = URL(string: appStoreLink) {
+                ShareView(activityItems: [
+                    "Check out MemeAI - the ultimate meme coin tracker!",
+                    url
+                ])
+            }
+        }
     }
     
     private func restorePurchases() {

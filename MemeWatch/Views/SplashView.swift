@@ -75,8 +75,9 @@ struct SplashView: View {
     
     func refreshData() async {
         try? await CoinDataApi.shared.fetchFearAndGreedIndicator()
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            withAnimation(.easeOut(duration: 0.5)) {
+            withAnimation {
                 appManager.showSplashView = false
             }
         }

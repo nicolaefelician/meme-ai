@@ -46,7 +46,6 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
     }
 }
 
-
 @main
 struct MemeWatchApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
