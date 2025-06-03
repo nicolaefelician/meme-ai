@@ -83,6 +83,7 @@ struct OnboardingView: View {
                 impactFeedback.impactOccurred()
                 withAnimation {
                     appManager.completedOnboarding()
+                    Superwall.shared.register(placement: "test")
                 }
             }) {
                 Text("Skip")
@@ -179,9 +180,12 @@ struct OnboardingView: View {
                 
                 if currentOnboardingIndex == onboardingInfos.count - 1 {
                     requestReview()
+                    
                     withAnimation {
                         appManager.completedOnboarding()
                     }
+                    
+                    Superwall.shared.register(placement: "campaign_trigger")
                 } else {
                     withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
                         showContent = false
