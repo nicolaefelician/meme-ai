@@ -53,36 +53,18 @@ workflows:
       - name: List available schemes
         script: |
           xcodebuild -workspace "$XCODE_WORKSPACE" -list
-      - name: Create export options plist
+      - name: Use CodeMagic generated export options
         script: |
-          # Get provisioning profile UUIDs
-          MAIN_PROFILE_UUID=$(find ~/Library/MobileDevice -name "*.mobileprovision" -exec bash -c 'if security cms -D -i "$1" | grep -q "com.pileus.meme.ai</string>"; then security cms -D -i "$1" | grep -A1 UUID | grep string | sed "s/.*<string>\(.*\)<\/string>.*/\1/"; fi' _ {} \; | head -1)
-          WIDGET_PROFILE_UUID=$(find ~/Library/MobileDevice -name "*.mobileprovision" -exec bash -c 'if security cms -D -i "$1" | grep -q "com.pileus.meme.ai.CoinWidget</string>"; then security cms -D -i "$1" | grep -A1 UUID | grep string | sed "s/.*<string>\(.*\)<\/string>.*/\1/"; fi' _ {} \; | head -1)
-          
-          echo "Main app profile UUID: $MAIN_PROFILE_UUID"
-          echo "Widget profile UUID: $WIDGET_PROFILE_UUID"
-          
-          # Try automatic signing style to let Xcode handle profile selection
-          cat > export_options.plist << EOF
-          <?xml version="1.0" encoding="UTF-8"?>
-          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-          <plist version="1.0">
-          <dict>
-              <key>method</key>
-              <string>app-store-connect</string>
-              <key>teamID</key>
-              <string>99L37595Y5</string>
-              <key>signingStyle</key>
-              <string>automatic</string>
-              <key>stripSwiftSymbols</key>
-              <true/>
-              <key>uploadSymbols</key>
-              <true/>
-              <key>compileBitcode</key>
-              <false/>
-          </dict>
-          </plist>
-          EOF
+          # CodeMagic automatically generates export_options.plist with correct profiles
+          # Let's just verify it exists and show its contents
+          if [ -f "/Users/builder/export_options.plist" ]; then
+            echo "=== Using CodeMagic generated export options ==="
+            cat /Users/builder/export_options.plist
+            cp /Users/builder/export_options.plist ./export_options.plist
+          else
+            echo "ERROR: CodeMagic did not generate export_options.plist"
+            exit 1
+          fi
       - name: Debug Xcode build and archive
         script: |
           set -e
