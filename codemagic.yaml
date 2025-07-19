@@ -32,9 +32,11 @@ workflows:
           keychain initialize
           keychain add-certificates
           echo "Fetching signing files for main app: $BUNDLE_ID"
-          app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --create
+          app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --create --strict-match-app-id
           echo "Fetching signing files for widget: $WIDGET_BUNDLE_ID"
-          app-store-connect fetch-signing-files "$WIDGET_BUNDLE_ID" --type IOS_APP_STORE --create
+          app-store-connect fetch-signing-files "$WIDGET_BUNDLE_ID" --type IOS_APP_STORE --create --strict-match-app-id
+          echo "=== Listing fetched provisioning profiles ==="
+          find ~/Library/MobileDevice -name "*.mobileprovision" -exec bash -c 'echo "Profile: $1"; security cms -D -i "$1" | grep -E "(Name|application-identifier|Entitlements)" -A5' _ {} \;
           xcode-project use-profiles
       - name: Set up provisioning profiles settings on Xcode project
         script: |
@@ -60,7 +62,7 @@ workflows:
           echo "Main app profile UUID: $MAIN_PROFILE_UUID"
           echo "Widget profile UUID: $WIDGET_PROFILE_UUID"
           
-          # Create export options without explicit provisioning profiles - let xcodebuild auto-select
+          # Try automatic signing style to let Xcode handle profile selection
           cat > export_options.plist << EOF
           <?xml version="1.0" encoding="UTF-8"?>
           <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -71,7 +73,7 @@ workflows:
               <key>teamID</key>
               <string>99L37595Y5</string>
               <key>signingStyle</key>
-              <string>manual</string>
+              <string>automatic</string>
               <key>stripSwiftSymbols</key>
               <true/>
               <key>uploadSymbols</key>
