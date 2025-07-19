@@ -49,6 +49,8 @@ struct CoinDataView: View {
     
     let id: Int
     
+    @State private var isInWatchlist = false
+    
     init(coinId: Int) {
         self.id = coinId
         _viewModel = StateObject(wrappedValue: CoinDataViewModel(id: coinId))
@@ -70,6 +72,35 @@ struct CoinDataView: View {
                 .font(.custom(TextFonts.interMedium.rawValue, size: 17))
                 .foregroundColor(viewModel.selectedDateRange == timeRange ? .black : .gray)
                 .frame(maxWidth: .infinity)
+        }
+    }
+    
+    private func checkIfInWatchlist() {
+        let watchList = Consts.shared.sharedWatchList
+        isInWatchlist = watchList.contains(id)
+    }
+    
+    private func toggleWatchlist() {
+        viewModel.impactFeedback.impactOccurred()
+        
+        var currentWatchList = Consts.shared.sharedWatchList
+        
+        if isInWatchlist {
+            currentWatchList.removeAll { $0 == id }
+            isInWatchlist = false
+            print("Removed coin \(id) from watchlist")
+        } else {
+            currentWatchList.append(id)
+            isInWatchlist = true
+            print("Added coin \(id) to watchlist")
+        }
+        
+        Consts.shared.saveSharedWatchList(currentWatchList)
+        
+        UserDefaults.standard.set(currentWatchList, forKey: "watchList")
+        
+        Task {
+            await UserApi.shared.loadWatchList()
         }
     }
     
@@ -490,14 +521,18 @@ struct CoinDataView: View {
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     HStack(spacing: 15) {
                                         ForEach(viewModel.postsList, id: \.postTime) { post in
-                                            PostCard(post: post)
+                                            Button(action: {
+                                                appManager.path.append(.postDetailView(post: post))
+                                            }) {
+                                                PostCard(post: post)
+                                            }
+                                            .buttonStyle(PlainButtonStyle())
                                         }
                                     }
                                     .padding(.horizontal, 20)
                                 }
                             }
-                            .padding(.top, 30)
-                            
+                            .padding(.vertical, 30)
                         }
                         
                         if let contractInfo = coinData.platforms, !contractInfo.isEmpty {
@@ -668,17 +703,20 @@ struct CoinDataView: View {
                 .navigationTitle(coinData.symbol)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
-                    //                    ToolbarItem(placement: .topBarTrailing) {
-                    //                        Button(action: {
-                    //
-                    //                        }) {
-                    //                            Image(systemName: "star.fill")
-                    //                                .resizable()
-                    //                                .scaledToFit()
-                    //                                .frame(width: 25, height: 25)
-                    //                                .foregroundStyle(.yellow)
-                    //                        }
-                    //                    }
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button(action: {
+                            toggleWatchlist()
+                        }) {
+                            Image(systemName: isInWatchlist ? "star.fill" : "star")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 25, height: 25)
+                                .foregroundStyle(isInWatchlist ? .yellow : .gray)
+                        }
+                    }
+                }
+                .onAppear {
+                    checkIfInWatchlist()
                 }
             }
             

@@ -51,7 +51,7 @@ struct ContentView: View {
     
     private func getViewTitle(for index: Int) -> String {
         switch index {
-        case 0: return "Meme.co"
+        case 0: return "Meme AI"
         case 1: return "News"
         case 2: return "AI Chart Analysis"
         case 3: return "Search"
@@ -98,6 +98,7 @@ struct ContentView: View {
                     case .coinDataView(let id): CoinDataView(coinId: id)
                     case .newsDataView(let id): NewsDataView(id: id)
                     case .coinAnalysisView(let analysis) : CoinAnalysisView(analysis: analysis)
+                    case .postDetailView(let post): PostDetailView(post: post)
                     }
                 }
                 .navigationTitle(getViewTitle(for: viewModel.selectedTabIndex))

@@ -3,6 +3,7 @@ import StoreKit
 
 struct SettingsView: View {
     @State private var isSharing = false
+    @State private var showWidgetGuide = false
     @Environment(\.requestReview) var requestReview
     @ObservedObject private var appManager = AppManager.shared
     
@@ -22,6 +23,10 @@ struct SettingsView: View {
                     
                     settingButton(icon: "hand.thumbsup", title: "Rate us") {
                         requestReview()
+                    }
+                    
+                    settingButton(icon: "rectangle.on.rectangle", title: "Add Home Widget") {
+                        showWidgetGuide = true
                     }
                     
                     Divider().background(Color.gray.opacity(0.4)).padding(.horizontal, 20)
@@ -61,6 +66,9 @@ struct SettingsView: View {
                     url
                 ])
             }
+        }
+        .sheet(isPresented: $showWidgetGuide) {
+            WidgetGuideView()
         }
     }
     

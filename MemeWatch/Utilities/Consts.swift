@@ -16,10 +16,40 @@ final class Consts {
     let appVersion = "1.0.0"
     let firebaseTokenId = ""
     
-    let openAiApiKey = "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"
+    let appGroupIdentifier = "group.com.pileus.memewatch.shared"
+    
+    let openAiApiKey = "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"
     
     func loadContent() {
         AppManager.shared.showOnboarding = !UserDefaults.standard.bool(forKey: "hasShownOnboarding")
+    }
+    
+    var storedUserId: String? {
+        return UserDefaults.standard.string(forKey: "userId")
+    }
+    
+    var sharedUserId: String? {
+        return sharedUserDefaults?.string(forKey: "userId")
+    }
+    
+    var favoriteCoins: [Int] {
+        return UserDefaults.standard.array(forKey: "favoriteCoins") as? [Int] ?? []
+    }
+    
+    var sharedUserDefaults: UserDefaults? {
+        return UserDefaults(suiteName: appGroupIdentifier)
+    }
+    
+    var sharedWatchList: [Int] {
+        return sharedUserDefaults?.array(forKey: "watchList") as? [Int] ?? []
+    }
+    
+    func saveToSharedDefaults(key: String, value: Any) {
+        sharedUserDefaults?.set(value, forKey: key)
+    }
+    
+    func saveSharedWatchList(_ watchList: [Int]) {
+        sharedUserDefaults?.set(watchList, forKey: "watchList")
     }
 }
 
@@ -27,6 +57,7 @@ enum NavigationView: Hashable {
     case coinDataView(coinId: Int)
     case newsDataView(newsId: String)
     case coinAnalysisView(analysis: CoinAnalysis)
+    case postDetailView(post: Post)
 }
 
 enum TimeRange: String, CaseIterable {

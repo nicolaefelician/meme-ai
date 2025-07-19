@@ -6,6 +6,8 @@ final class HomeViewModel: ObservableObject {
     @Published var selctedCoinCategory: CoinCategory = .gainers
     @Published var hasFetchedData: Bool = false
     @Published var isLoading: Bool = true
+    @Published var showPremiumPreview = false
+    @Published var selectedCoin: Coin?
     
     let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
     
@@ -141,7 +143,9 @@ struct HomeView: View {
                                             viewModel.impactFeedback.impactOccurred()
                                             appManager.path.append(.coinDataView(coinId: coin.id))
                                         } else {
-                                            Superwall.shared.register(placement: "campaign_trigger")
+                                            viewModel.impactFeedback.impactOccurred()
+                                            viewModel.selectedCoin = coin
+                                            viewModel.showPremiumPreview = true
                                         }
                                     }) {
                                         buildCoinHorizontalCard(coin: coin)
@@ -276,7 +280,9 @@ struct HomeView: View {
                                         viewModel.impactFeedback.impactOccurred()
                                         appManager.path.append(.coinDataView(coinId: coin.id))
                                     } else {
-                                        Superwall.shared.register(placement: "campaign_trigger")
+                                        viewModel.impactFeedback.impactOccurred()
+                                        viewModel.selectedCoin = coin
+                                        viewModel.showPremiumPreview = true
                                     }
                                 }) {
                                     CoinCard(coin: coin, selectedTimeRange: viewModel.selectedTimeRange, selectedCategory: viewModel.selctedCoinCategory)
@@ -301,6 +307,11 @@ struct HomeView: View {
                 await viewModel.refreshData()
                 try? await CoinDataApi.shared.fetchFearAndGreedIndicator()
                 hasFetchedApi = true
+            }
+        }
+        .sheet(isPresented: $viewModel.showPremiumPreview) {
+            if let coin = viewModel.selectedCoin {
+                PremiumFeaturesPreviewView(coin: coin)
             }
         }
     }

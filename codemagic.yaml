@@ -11,6 +11,7 @@ workflows:
         bundle_identifier: com.pileus.meme.ai
       vars:
         BUNDLE_ID: "com.pileus.meme.ai"
+        WIDGET_BUNDLE_ID: "com.pileus.meme.ai.CoinInfoWidget"
         XCODE_WORKSPACE: "MemeWatch.xcworkspace"
         XCODE_SCHEME: "MemeWatch"
         APP_STORE_APPLE_ID: 6746212315
@@ -27,6 +28,8 @@ workflows:
         script: |
           keychain initialize
           keychain add-certificates
+          app-store-connect fetch-signing-files "$BUNDLE_ID" --type IOS_APP_STORE --create
+          app-store-connect fetch-signing-files "$WIDGET_BUNDLE_ID" --type IOS_APP_STORE --create
           xcode-project use-profiles
       - name: Set up provisioning profiles settings on Xcode project
         script: |

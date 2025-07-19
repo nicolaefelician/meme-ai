@@ -15,17 +15,55 @@
 		814FC86B2DE0296600625CEA /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 814FC86A2DE0296600625CEA /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		814FC86D2DE0296600625CEA /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 814FC86C2DE0296600625CEA /* FirebaseCrashlytics */; };
 		814FC86F2DE0296600625CEA /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 814FC86E2DE0296600625CEA /* FirebaseMessaging */; };
+		81E783DB2E2A6BFA00CF044C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81E783DA2E2A6BFA00CF044C /* WidgetKit.framework */; };
+		81E783DD2E2A6BFA00CF044C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81E783DC2E2A6BFA00CF044C /* SwiftUI.framework */; };
+		81E783EE2E2A6BFB00CF044C /* CoinInfoWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 81E783D92E2A6BFA00CF044C /* CoinInfoWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		81E783EC2E2A6BFB00CF044C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8130645B2D6CE24B00377856 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 81E783D82E2A6BFA00CF044C;
+			remoteInfo = CoinInfoWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		81E783EF2E2A6BFB00CF044C /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				81E783EE2E2A6BFB00CF044C /* CoinInfoWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		7C02B9EE0F1D14F2DB138C0B /* Pods_MemeWatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MemeWatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		812E34F32DEF65810022AFAF /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		813064632D6CE24B00377856 /* MemeWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemeWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		815A856A2E2AAA100084CFE3 /* CoinInfoWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CoinInfoWidgetExtension.entitlements; sourceTree = "<group>"; };
+		81E783D92E2A6BFA00CF044C /* CoinInfoWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CoinInfoWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		81E783DA2E2A6BFA00CF044C /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		81E783DC2E2A6BFA00CF044C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		D1D0F2EC8C72BEFB492D5BAB /* Pods-MemeWatch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemeWatch.debug.xcconfig"; path = "Target Support Files/Pods-MemeWatch/Pods-MemeWatch.debug.xcconfig"; sourceTree = "<group>"; };
 		DB4434449C01D0E4F51F882B /* Pods-MemeWatch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemeWatch.release.xcconfig"; path = "Target Support Files/Pods-MemeWatch/Pods-MemeWatch.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		81E783F32E2A6BFB00CF044C /* Exceptions for "CoinInfoWidget" folder in "CoinInfoWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 81E783D82E2A6BFA00CF044C /* CoinInfoWidgetExtension */;
+		};
 		81EE39CD2D71E2600045526E /* Exceptions for "MemeWatch" folder in "MemeWatch" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -42,6 +80,14 @@
 				81EE39CD2D71E2600045526E /* Exceptions for "MemeWatch" folder in "MemeWatch" target */,
 			);
 			path = MemeWatch;
+			sourceTree = "<group>";
+		};
+		81E783DE2E2A6BFA00CF044C /* CoinInfoWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				81E783F32E2A6BFB00CF044C /* Exceptions for "CoinInfoWidget" folder in "CoinInfoWidgetExtension" target */,
+			);
+			path = CoinInfoWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -62,6 +108,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		81E783D62E2A6BFA00CF044C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81E783DD2E2A6BFA00CF044C /* SwiftUI.framework in Frameworks */,
+				81E783DB2E2A6BFA00CF044C /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -79,6 +134,8 @@
 			children = (
 				812E34F32DEF65810022AFAF /* StoreKit.framework */,
 				7C02B9EE0F1D14F2DB138C0B /* Pods_MemeWatch.framework */,
+				81E783DA2E2A6BFA00CF044C /* WidgetKit.framework */,
+				81E783DC2E2A6BFA00CF044C /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -86,7 +143,9 @@
 		8130645A2D6CE24B00377856 = {
 			isa = PBXGroup;
 			children = (
+				815A856A2E2AAA100084CFE3 /* CoinInfoWidgetExtension.entitlements */,
 				813064652D6CE24B00377856 /* MemeWatch */,
+				81E783DE2E2A6BFA00CF044C /* CoinInfoWidget */,
 				813064642D6CE24B00377856 /* Products */,
 				2BC190A973184BB652DA2133 /* Pods */,
 				3C41E90C5D8C2D27AE78E832 /* Frameworks */,
@@ -97,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				813064632D6CE24B00377856 /* MemeWatch.app */,
+				81E783D92E2A6BFA00CF044C /* CoinInfoWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -112,10 +172,12 @@
 				8130645F2D6CE24B00377856 /* Sources */,
 				813064602D6CE24B00377856 /* Frameworks */,
 				813064612D6CE24B00377856 /* Resources */,
+				81E783EF2E2A6BFB00CF044C /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				81E783ED2E2A6BFB00CF044C /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				813064652D6CE24B00377856 /* MemeWatch */,
@@ -125,6 +187,28 @@
 			productReference = 813064632D6CE24B00377856 /* MemeWatch.app */;
 			productType = "com.apple.product-type.application";
 		};
+		81E783D82E2A6BFA00CF044C /* CoinInfoWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 81E783F22E2A6BFB00CF044C /* Build configuration list for PBXNativeTarget "CoinInfoWidgetExtension" */;
+			buildPhases = (
+				81E783D52E2A6BFA00CF044C /* Sources */,
+				81E783D62E2A6BFA00CF044C /* Frameworks */,
+				81E783D72E2A6BFA00CF044C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				81E783DE2E2A6BFA00CF044C /* CoinInfoWidget */,
+			);
+			name = CoinInfoWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = CoinInfoWidgetExtension;
+			productReference = 81E783D92E2A6BFA00CF044C /* CoinInfoWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -132,11 +216,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1620;
+				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					813064622D6CE24B00377856 = {
 						CreatedOnToolsVersion = 16.2;
+					};
+					81E783D82E2A6BFA00CF044C = {
+						CreatedOnToolsVersion = 16.4;
 					};
 				};
 			};
@@ -160,12 +247,20 @@
 			projectRoot = "";
 			targets = (
 				813064622D6CE24B00377856 /* MemeWatch */,
+				81E783D82E2A6BFA00CF044C /* CoinInfoWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		813064612D6CE24B00377856 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81E783D72E2A6BFA00CF044C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -207,7 +302,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		81E783D52E2A6BFA00CF044C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		81E783ED2E2A6BFB00CF044C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 81E783D82E2A6BFA00CF044C /* CoinInfoWidgetExtension */;
+			targetProxy = 81E783EC2E2A6BFB00CF044C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		8130646F2D6CE24C00377856 /* Debug */ = {
@@ -337,7 +447,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MemeWatch/MemeWatch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"MemeWatch/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
@@ -357,7 +467,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pileus.meme.ai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -374,7 +484,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MemeWatch/MemeWatch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"MemeWatch/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
@@ -394,9 +504,67 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pileus.meme.ai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		81E783F02E2A6BFB00CF044C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = CoinInfoWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 6;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CoinInfoWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CoinInfoWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.5;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pileus.meme.ai.CoinInfoWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		81E783F12E2A6BFB00CF044C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = CoinInfoWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 6;
+				DEVELOPMENT_TEAM = 99L37595Y5;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CoinInfoWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CoinInfoWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.5;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pileus.meme.ai.CoinInfoWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -420,6 +588,15 @@
 			buildConfigurations = (
 				813064722D6CE24C00377856 /* Debug */,
 				813064732D6CE24C00377856 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		81E783F22E2A6BFB00CF044C /* Build configuration list for PBXNativeTarget "CoinInfoWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				81E783F02E2A6BFB00CF044C /* Debug */,
+				81E783F12E2A6BFB00CF044C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

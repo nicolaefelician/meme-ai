@@ -164,6 +164,20 @@ final class Coin: Decodable, Identifiable, Hashable, Sendable, Equatable, CoinIn
         }
     }
     
+    init (fromCoinDetails details: CoinData) {
+        self.id = details.id
+        self.name = details.name
+        self.selfReportedMarketCap = details.statistics.fullyDilutedMarketCap
+        self.symbol = details.symbol
+        self.price = details.statistics.price
+        self.volume24h = details.volume
+        self.priceChange24h = details.statistics.priceChangePercentage24h
+        self.marketCap = details.statistics.fullyDilutedMarketCap
+        self.priceChange1h = nil
+        self.priceChange7d = nil
+        self.priceChange30d = nil
+    }
+    
     init (fromNotificationData data: [AnyHashable : Any]) {
         self.id = Int(data["id"] as! String) ?? 1
         self.symbol = data["symbol"] as! String

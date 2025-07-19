@@ -104,7 +104,6 @@ extension AppDelegate: MessagingDelegate {
         Task {
             do {
                 try await UserApi.shared.registerUser(firebaseId: fcmToken)
-                print("User was successfully registered")
             } catch {
                 print("Failed to register user: \(error)")
             }

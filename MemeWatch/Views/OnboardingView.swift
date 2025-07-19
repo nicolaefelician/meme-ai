@@ -83,7 +83,7 @@ struct OnboardingView: View {
                 impactFeedback.impactOccurred()
                 withAnimation {
                     appManager.completedOnboarding()
-                    Superwall.shared.register(placement: "test")
+                    Superwall.shared.register(placement: "campaign_trigger")
                 }
             }) {
                 Text("Skip")

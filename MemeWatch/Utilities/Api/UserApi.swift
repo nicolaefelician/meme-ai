@@ -35,10 +35,31 @@ final class UserApi {
             
             if let jsonResponse = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
                 print("Registration response: \(jsonResponse)")
+                
+                if let userId = jsonResponse["id"] as? String {
+                    Consts.shared.saveToSharedDefaults(key: "userId", value: userId)
+                    print("User ID saved to both standard and shared UserDefaults: \(userId)")
+                }
             }
         } catch {
             print("Registration error: \(error.localizedDescription)")
             throw error
+        }
+    }
+    
+    func loadWatchList() async {
+        let watchListArray = Consts.shared.sharedWatchList
+        
+        var coinArray: [Coin] = []
+        for id in watchListArray {
+            if let coinDetails = await CoinDataApi.shared.getCoinData(id: id) {
+                let coin = Coin(fromCoinDetails: coinDetails)
+                coinArray.append(coin)
+            }
+        }
+        
+        DispatchQueue.main.async {
+            AppManager.shared.watchList = coinArray
         }
     }
 }

@@ -5,6 +5,8 @@ import SuperwallKit
 final class SearchCoinViewModel: ObservableObject {
     @Published var inputText: String = ""
     @Published var coinList: [Coin] = []
+    @Published var showPremiumPreview = false
+    @Published var selectedCoin: Coin?
     
     let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
     
@@ -53,7 +55,9 @@ struct SearchCoinView: View {
                                     viewModel.impactFeedback.impactOccurred()
                                     appManager.path.append(.coinDataView(coinId: coin.id))
                                 } else {
-                                    Superwall.shared.register(placement: "campaign_trigger")
+                                    viewModel.impactFeedback.impactOccurred()
+                                    viewModel.selectedCoin = coin
+                                    viewModel.showPremiumPreview = true
                                 }
                             }) {
                                 CoinCard(coin: coin, selectedTimeRange: .oneHour, selectedCategory: .gainers)
@@ -92,6 +96,11 @@ struct SearchCoinView: View {
                 .padding(.horizontal, 17)
                 
                 Spacer()
+            }
+        }
+        .sheet(isPresented: $viewModel.showPremiumPreview) {
+            if let coin = viewModel.selectedCoin {
+                PremiumFeaturesPreviewView(coin: coin)
             }
         }
     }
