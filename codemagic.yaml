@@ -53,6 +53,13 @@ workflows:
           xcodebuild -workspace "$XCODE_WORKSPACE" -list
       - name: Create export options plist
         script: |
+          # Get provisioning profile UUIDs
+          MAIN_PROFILE_UUID=$(find ~/Library/MobileDevice -name "*.mobileprovision" -exec bash -c 'if security cms -D -i "$1" | grep -q "com.pileus.meme.ai</string>"; then security cms -D -i "$1" | grep -A1 UUID | grep string | sed "s/.*<string>\(.*\)<\/string>.*/\1/"; fi' _ {} \; | head -1)
+          WIDGET_PROFILE_UUID=$(find ~/Library/MobileDevice -name "*.mobileprovision" -exec bash -c 'if security cms -D -i "$1" | grep -q "com.pileus.meme.ai.CoinWidget</string>"; then security cms -D -i "$1" | grep -A1 UUID | grep string | sed "s/.*<string>\(.*\)<\/string>.*/\1/"; fi' _ {} \; | head -1)
+          
+          echo "Main app profile UUID: $MAIN_PROFILE_UUID"
+          echo "Widget profile UUID: $WIDGET_PROFILE_UUID"
+          
           cat > export_options.plist << EOF
           <?xml version="1.0" encoding="UTF-8"?>
           <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -70,6 +77,13 @@ workflows:
               <true/>
               <key>compileBitcode</key>
               <false/>
+              <key>provisioningProfiles</key>
+              <dict>
+                  <key>com.pileus.meme.ai</key>
+                  <string>\$MAIN_PROFILE_UUID</string>
+                  <key>com.pileus.meme.ai.CoinWidget</key>
+                  <string>\$WIDGET_PROFILE_UUID</string>
+              </dict>
           </dict>
           </plist>
           EOF
@@ -90,13 +104,23 @@ workflows:
             CODE_SIGN_STYLE="Manual" \
             CODE_SIGN_IDENTITY="Apple Distribution" \
             COMPILER_INDEX_STORE_ENABLE=NO
+      - name: Debug provisioning profiles before export
+        script: |
+          echo "=== Provisioning Profiles in Archive ==="
+          find "$CM_BUILD_DIR/build/ios/xcarchive" -name "*.mobileprovision" -exec bash -c 'echo "Profile: $1"; security cms -D -i "$1" | grep -A5 -B5 "application-identifier\|Entitlements\|Name"' _ {} \;
+          echo "=== Available Provisioning Profiles ==="
+          find ~/Library/MobileDevice -name "*.mobileprovision" -exec bash -c 'echo "=== $1 ==="; security cms -D -i "$1" | grep -A10 -B2 "Name\|application-identifier\|Entitlements"' _ {} \;
       - name: Export IPA
         script: |
           mkdir -p "$CM_BUILD_DIR/build/ios/ipa"
+          echo "=== Export Options ==="
+          cat export_options.plist
+          echo "=== Starting Export ==="
           xcodebuild -exportArchive \
             -archivePath "$CM_BUILD_DIR/build/ios/xcarchive/MemeWatch.xcarchive" \
             -exportPath "$CM_BUILD_DIR/build/ios/ipa" \
-            -exportOptionsPlist export_options.plist
+            -exportOptionsPlist export_options.plist \
+            -verbose
     artifacts:
       - build/ios/ipa/*.ipa
       - /tmp/xcodebuild_logs/*.log
