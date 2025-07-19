@@ -59,7 +59,7 @@ workflows:
           <plist version="1.0">
           <dict>
               <key>method</key>
-              <string>app-store</string>
+              <string>app-store-connect</string>
               <key>teamID</key>
               <string>99L37595Y5</string>
               <key>signingStyle</key>
