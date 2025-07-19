@@ -11,7 +11,7 @@ workflows:
         bundle_identifier: com.pileus.meme.ai
       vars:
         BUNDLE_ID: "com.pileus.meme.ai"
-        WIDGET_BUNDLE_ID: "com.pileus.meme.ai.CoinInfoWidget"
+        WIDGET_BUNDLE_ID: "com.pileus.meme.ai.CoinWidget"
         XCODE_WORKSPACE: "MemeWatch.xcworkspace"
         XCODE_SCHEME: "MemeWatch"
         APP_STORE_APPLE_ID: 6746212315
