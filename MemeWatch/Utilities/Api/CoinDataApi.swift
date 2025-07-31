@@ -83,7 +83,7 @@ final class CoinDataApi {
         headers.forEach { request.setValue($1, forHTTPHeaderField: $0) }
         
         do {
-            let (data, _) = try await URLSession.shared.data(for: request)
+            let (data, _) = try await safeSession().data(for: request)
             
             let decoded = try JSONDecoder().decode(TrendingPostsApiResponse.self, from: data)
             

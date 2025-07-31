@@ -13,7 +13,7 @@ final class Consts {
     let superwallApiKey: String = "pk_2e4bce9df65c721b1f9630fe0921ad3c1a8b686a1245ea0d"
     
     let appCode = "meme-ai"
-    let appVersion = "1.0.0"
+    let appVersion = "1.0.6"
     let firebaseTokenId = ""
     
     let appGroupIdentifier = "group.com.pileus.memewatch.shared"

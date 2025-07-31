@@ -109,11 +109,17 @@ final class CoinAnalysisApi {
     }
     
     func fetchChatResponse(_ input: String, history: [ChatMessage], images: [String]) async throws -> AsyncThrowingStream<String, Error> {
-        guard let url = URL(string: "https://center.tocaas.com/api/chat/chat") else { throw URLError(.badURL) }
+        guard let url = URL(string: "https://api.openai.com/v1/chat/completions") else { throw URLError(.badURL) }
+        
+        print("=== fetchChatResponse API Request Started ===")
+        print("URL: \(url)")
+        print("Input: \(input)")
+        print("History count: \(history.count)")
+        print("Images count: \(images.count)")
         
         var messages: [[String: Any]] = [
             [
-                "role": "developer",
+                "role": "system",
                 "content": systemPrompt
             ]
         ]
@@ -124,7 +130,7 @@ final class CoinAnalysisApi {
                 "content": chatHistory.sendText
             ])
             messages.append([
-                "role": "developer",
+                "role": "assistant",
                 "content": chatHistory.responseText ?? ""
             ])
         }
@@ -147,16 +153,20 @@ final class CoinAnalysisApi {
         let requestBody: [String: Any] = [
             "model": "gpt-4o-mini",
             "messages": messages,
-            "stop": [
-                "\n\n\n",
-                "<|im_end|>"
-            ],
             "stream": true,
         ]
         
-        var request = URLRequest(url: url)
+        print("Request body model: \(requestBody["model"] ?? "unknown")")
+        print("Total messages in request: \(messages.count)")
         
+        let headers = [
+            "Content-Type": "application/json",
+            "Authorization": "Bearer \(Consts.shared.openAiApiKey)"
+        ]
+        
+        var request = URLRequest(url: url)
         request.httpMethod = "POST"
+        request.allHTTPHeaderFields = headers
         
         guard let jsonData = try? JSONSerialization.data(withJSONObject: requestBody, options: []) else {
             print("Error: Unable to serialize JSON")
@@ -164,12 +174,29 @@ final class CoinAnalysisApi {
         }
         request.httpBody = jsonData
         
-        let (result, response) = try await URLSession.shared.bytes(for: request)
+        print("Request body size: \(jsonData.count) bytes")
+        
+        let (result, response) = try await safeSession().bytes(for: request)
         
         if let httpResponse = response as? HTTPURLResponse {
-            print("HTTP Status Code:", httpResponse.statusCode)
+            print("=== HTTP Response Details ===")
+            print("Status Code: \(httpResponse.statusCode)")
+            print("Headers: \(httpResponse.allHeaderFields)")
+            
+            if httpResponse.statusCode == 429 {
+                print("⚠️ 429 Too Many Requests Error!")
+                if let retryAfter = httpResponse.allHeaderFields["Retry-After"] {
+                    print("Retry-After header: \(retryAfter)")
+                }
+                if let rateLimitRemaining = httpResponse.allHeaderFields["X-RateLimit-Remaining"] {
+                    print("Rate Limit Remaining: \(rateLimitRemaining)")
+                }
+                if let rateLimitReset = httpResponse.allHeaderFields["X-RateLimit-Reset"] {
+                    print("Rate Limit Reset: \(rateLimitReset)")
+                }
+            }
         } else {
-            print("Invalid response")
+            print("Invalid response - not an HTTPURLResponse")
         }
         
         guard let httpResponse = response as? HTTPURLResponse else {
@@ -177,19 +204,60 @@ final class CoinAnalysisApi {
         }
         
         guard 200...299 ~= httpResponse.statusCode else {
+            print("⚠️ API Error: Status code \(httpResponse.statusCode)")
+            
+            var errorBody = ""
+            for try await line in result.lines {
+                errorBody += line + "\n"
+            }
+            print("Error response body: \(errorBody)")
+            
             throw ApiError.invalidResponse
         }
+        
+        print("✅ Request successful, starting to stream response...")
         
         return AsyncThrowingStream<String, Error> { continuation in
             Task(priority: .userInitiated) {
                 do {
+                    var lineCount = 0
+                    var totalContent = ""
+                    
                     for try await line in result.lines {
-                        if line.hasPrefix("data: "), let data = line.dropFirst(6).data(using: .utf8), let response = try? JSONDecoder().decode(ChatMessageApiResponse.self, from: data), let text = response.choices.first?.delta.content {
-                            continuation.yield(cleanResponse(text))
+                        lineCount += 1
+                        
+                        if line.hasPrefix("data: ") {
+                            let dataString = String(line.dropFirst(6))
+                            
+                            if dataString == "[DONE]" {
+                                print("Stream completed with [DONE] marker")
+                                break
+                            }
+                            
+                            if let data = dataString.data(using: .utf8) {
+                                do {
+                                    let response = try JSONDecoder().decode(ChatMessageApiResponse.self, from: data)
+                                    if let text = response.choices.first?.delta.content {
+                                        totalContent += text
+                                        continuation.yield(cleanResponse(text))
+                                    }
+                                } catch {
+                                    print("Failed to decode line \(lineCount): \(dataString)")
+                                    print("Decode error: \(error)")
+                                }
+                            }
+                        } else if !line.isEmpty {
+                            print("Unexpected line format at line \(lineCount): \(line)")
                         }
                     }
+                    
+                    print("=== Stream Completed ===")
+                    print("Total lines processed: \(lineCount)")
+                    print("Total content length: \(totalContent.count) characters")
+                    
                     continuation.finish()
                 } catch {
+                    print("⚠️ Stream error: \(error)")
                     continuation.finish(throwing: error)
                 }
             }
@@ -213,7 +281,7 @@ final class CoinAnalysisApi {
             "model": "gpt-4o-mini",
             "messages": [
                 [
-                    "role": "developer",
+                    "role": "system",
                     "content": """
                         \(systemPrompt)
                     
@@ -264,7 +332,7 @@ final class CoinAnalysisApi {
             "model": "gpt-4o-mini",
             "messages": [
                 [
-                    "role": "developer",
+                    "role": "system",
                     "content": """
                         \(systemPrompt)
                     

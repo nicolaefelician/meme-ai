@@ -21,7 +21,7 @@ class CoinDataApi {
         request.allHTTPHeaderFields = headers
         
         do {
-            let (data, _) = try await URLSession.shared.data(for: request)
+            let (data, _) = try await safeSession().data(for: request)
             let response = try JSONDecoder().decode(CoinDataApiResponse.self, from: data)
             return response.data
         } catch {

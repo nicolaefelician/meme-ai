@@ -40,7 +40,7 @@ class CoinListApi {
         request.setValue("application/json", forHTTPHeaderField: "Accepts")
         
         do {
-            let (data, _) = try await URLSession.shared.data(for: request)
+            let (data, _) = try await safeSession().data(for: request)
             let decoded = try JSONDecoder().decode(CoinDataListApiResponse.self, from: data)
             
             return GainerLoserResponse(

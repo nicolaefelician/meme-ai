@@ -23,7 +23,7 @@ final class UserApi {
             let jsonData = try JSONSerialization.data(withJSONObject: requestBody)
             request.httpBody = jsonData
             
-            let (data, response) = try await URLSession.shared.data(for: request)
+            let (data, response) = try await safeSession().data(for: request)
             
             guard let httpResponse = response as? HTTPURLResponse else {
                 throw URLError(.badServerResponse)

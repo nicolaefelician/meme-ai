@@ -25,7 +25,7 @@ struct PremiumFeaturesPreviewView: View {
             title: "Advanced Charts",
             description: "Access detailed price charts with multiple timeframes, technical indicators, and comprehensive market data.",
             color: .green,
-            imageName: "premium2"
+            imageName: "premium1"
         )
     ]
     

@@ -67,7 +67,8 @@ struct Provider: TimelineProvider {
     
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
         Task {
-            let watchList = await CoinDataApi.shared.loadWatchList()
+            let coins = await CoinDataApi.shared.loadWatchList()
+            let watchList = Array(coins.prefix(3))
             
             if watchList.isEmpty {
                 if let gainerLoserData = await CoinListApi.shared.fetchGainerLoserList() {
@@ -143,16 +144,23 @@ struct CoinInfoWidgetEntryView : View {
         if entry.isWatchlist {
             VStack(spacing: 4) {
                 HStack {
-                    Text("Watchlist")
-                        .font(.system(size: 16, weight: .bold))
+                    HStack(spacing: 6) {
+                        Image("icon")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .clipShape(Circle())
+                        Text("Watchlist")
+                            .font(.system(size: 16, weight: .bold))
+                            .foregroundColor(.black)
+                    }
                     Spacer()
                     Text("See All")
                         .font(.system(size: 12))
                         .foregroundColor(.blue)
                 }
-                .padding(.vertical, 6)
+                .padding(.vertical, 4)
                 
-                HStack(spacing: 12) {
+                HStack(spacing: 8) {
                     ForEach(entry.coins.prefix(3)) { coin in
                         CoinMediumRowView(coin: coin)
                             .frame(maxWidth: .infinity)
@@ -165,18 +173,25 @@ struct CoinInfoWidgetEntryView : View {
         } else {
             VStack(spacing: 4) {
                 HStack {
-                    Text("Gainers & Losers")
-                        .font(.system(size: 16, weight: .bold))
+                    HStack(spacing: 6) {
+                        Image("icon")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .clipShape(Circle())
+                        Text("Gainers & Losers")
+                            .font(.system(size: 16, weight: .bold))
+                            .foregroundColor(.black)
+                    }
                     Spacer()
                     Text("See All")
                         .font(.system(size: 12))
                         .foregroundColor(.blue)
                 }
-                .padding(.vertical, 6)
+                .padding(.vertical, 4)
                 
                 HStack(spacing: 15) {
                     if !entry.gainers.isEmpty {
-                        VStack(alignment: .leading, spacing: 6) {
+                        VStack(alignment: .leading, spacing: 4) {
                             Text("Gainers")
                                 .font(.system(size: 11, weight: .medium))
                                 .foregroundColor(.green)
@@ -188,7 +203,7 @@ struct CoinInfoWidgetEntryView : View {
                     }
                     
                     if !entry.losers.isEmpty {
-                        VStack(alignment: .leading, spacing: 6) {
+                        VStack(alignment: .leading, spacing: 4) {
                             Text("Losers")
                                 .font(.system(size: 11, weight: .medium))
                                 .foregroundColor(.red)
@@ -206,130 +221,15 @@ struct CoinInfoWidgetEntryView : View {
     }
 }
 
-struct CachedAsyncImage: View {
-    let url: String
-    let coin: Coin
-    @State private var uiImage: UIImage?
-    @State private var isLoading = true
-    
-    var body: some View {
-        Group {
-            if let uiImage = uiImage {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .clipShape(Circle())
-            } else if isLoading {
-                Circle()
-                    .fill(Color.gray.opacity(0.3))
-            } else {
-                // Fallback to colored circle with letter
-                Circle()
-                    .fill(coinColor(for: coin.symbol))
-                    .overlay(
-                        Text(String(coin.symbol.prefix(1)))
-                            .font(.system(size: 12, weight: .bold))
-                            .foregroundColor(.white)
-                    )
-            }
-        }
-        .onAppear {
-            loadImage()
-        }
-    }
-    
-    private func loadImage() {
-        print("🔄 WIDGET: Starting to load image for \(coin.symbol)")
-        print("🔄 WIDGET: URL: \(url)")
-        
-        if let cachedImage = ImageCache.shared.getImage(for: url) {
-            print("✅ WIDGET: Found cached image for \(coin.symbol)")
-            self.uiImage = cachedImage
-            self.isLoading = false
-            return
-        }
-        
-        Task {
-            do {
-                guard let imageUrl = URL(string: url) else {
-                    print("❌ WIDGET: Invalid URL for \(coin.symbol): \(url)")
-                    DispatchQueue.main.async {
-                        self.isLoading = false
-                    }
-                    return
-                }
-                
-                print("🌐 WIDGET: Making network request for \(coin.symbol)")
-                let (data, response) = try await URLSession.shared.data(from: imageUrl)
-                
-                if let httpResponse = response as? HTTPURLResponse {
-                    print("📡 WIDGET: HTTP Status \(httpResponse.statusCode) for \(coin.symbol)")
-                }
-                
-                print("📊 WIDGET: Downloaded \(data.count) bytes for \(coin.symbol)")
-                
-                if let downloadedImage = UIImage(data: data) {
-                    print("✅ WIDGET: Successfully created UIImage for \(coin.symbol)")
-                    ImageCache.shared.setImage(downloadedImage, for: url)
-                    
-                    DispatchQueue.main.async {
-                        self.uiImage = downloadedImage
-                        self.isLoading = false
-                    }
-                } else {
-                    print("❌ WIDGET: Failed to create UIImage from data for \(coin.symbol)")
-                    DispatchQueue.main.async {
-                        self.isLoading = false
-                    }
-                }
-            } catch {
-                print("❌ WIDGET: Failed to download image for \(coin.symbol): \(error)")
-                DispatchQueue.main.async {
-                    self.isLoading = false
-                }
-            }
-        }
-    }
-    
-    private func coinColor(for symbol: String) -> Color {
-        let colors: [Color] = [.blue, .green, .orange, .purple, .red, .pink, .indigo]
-        let index = abs(symbol.hashValue) % colors.count
-        return colors[index]
-    }
-}
-
-final class ImageCache {
-    static let shared = ImageCache()
-    private var cache: [String: UIImage] = [:]
-    private let cacheLimit = 50
-    
-    private init() {}
-    
-    func getImage(for url: String) -> UIImage? {
-        return cache[url]
-    }
-    
-    func setImage(_ image: UIImage, for url: String) {
-        if cache.count >= cacheLimit {
-            cache.removeAll()
-        }
-        cache[url] = image
-    }
-}
 
 struct CoinMediumRowView: View {
     let coin: Coin
     
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            HStack {
-                CachedAsyncImage(url: coin.image, coin: coin)
-                .frame(width: 24, height: 24)
-                
-                Text(coin.symbol)
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(.black)
-            }
+            Text(coin.symbol)
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundColor(.black)
             
             coin.buildFormattedPrice(price: coin.price)
                 .font(.system(size: 12))
@@ -341,23 +241,7 @@ struct CoinMediumRowView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
     
-    func formatPrice(_ price: Double) -> String {
-        if price < 0.01 {
-            return String(format: "%.6f", price)
-        } else if price < 1 {
-            return String(format: "%.4f", price)
-        } else if price < 100 {
-            return String(format: "%.2f", price)
-        } else {
-            return String(format: "%.0f", price)
-        }
-    }
     
-    func coinColor(for symbol: String) -> Color {
-        let colors: [Color] = [.blue, .green, .orange, .purple, .red, .pink, .indigo]
-        let index = abs(symbol.hashValue) % colors.count
-        return colors[index]
-    }
 }
 
 struct CoinMediumCompactView: View {
@@ -366,50 +250,33 @@ struct CoinMediumCompactView: View {
     
     var body: some View {
         HStack(spacing: 6) {
-            CachedAsyncImage(url: coin.image, coin: coin)
-            .frame(width: 28, height: 28)
-            
             VStack(alignment: .leading, spacing: 1) {
                 Text(coin.symbol)
-                    .font(.system(size: 11, weight: .semibold))
+                    .font(.system(size: 12, weight: .semibold))
                     .foregroundColor(.black)
                     .lineLimit(1)
                 coin.buildFormattedPrice(price: coin.price)
-                    .font(.system(size: 9))
+                    .font(.system(size: 10))
                     .lineLimit(1)
             }
-            .frame(minWidth: 30, maxWidth: .infinity, alignment: .leading)
+            .frame(maxWidth: .infinity, alignment: .leading)
             
-            HStack(spacing: 1) {
+            HStack(spacing: 2) {
                 Image(systemName: "triangle.fill")
-                    .font(.system(size: 6))
+                    .font(.system(size: 7))
                     .rotationEffect(.degrees(isGainer ? 0 : 180))
                     .foregroundColor(isGainer ? .green : .red)
                 Text("\(String(format: "%.1f", abs(coin.priceChange24h)))%")
-                    .font(.system(size: 11, weight: .medium))
+                    .font(.system(size: 12, weight: .medium))
                     .foregroundColor(isGainer ? .green : .red)
                     .lineLimit(1)
             }
-            .frame(minWidth: 35)
+            .frame(minWidth: 45)
         }
-        .padding(.vertical, 4)
+        .padding(.vertical, 3)
     }
     
-    func formatPrice(_ price: Double) -> String {
-        if price < 0.01 {
-            return String(format: "%.4f", price)
-        } else if price < 1 {
-            return String(format: "%.3f", price)
-        } else {
-            return String(format: "%.2f", price)
-        }
-    }
     
-    func coinColor(for symbol: String) -> Color {
-        let colors: [Color] = [.blue, .green, .orange, .purple, .red, .pink, .indigo]
-        let index = abs(symbol.hashValue) % colors.count
-        return colors[index]
-    }
 }
 
 struct CoinInfoWidget: Widget {
