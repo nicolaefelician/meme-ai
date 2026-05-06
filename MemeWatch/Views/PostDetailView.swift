@@ -202,20 +202,3 @@ struct ActionButton: View {
         }
     }
 }
-
-#Preview {
-    NavigationStack {
-        PostDetailView(post: Post(
-            textContent: "🚀 $MAI is absolutely crushing it today! The community behind this AI meme token is incredible. Just hit a new ATH and the momentum is building. Who else is riding this wave? #MAI #AI #Crypto #MemeToken",
-            impressionCount: "562",
-            likeCount: "5",
-            repostCount: "0",
-            postTime: "2h",
-            owner: Post.Owner(
-                nickname: "kwx7xdol5cc7",
-                avatar: Post.Owner.Avatar(url: "https://example.com/avatar.jpg")
-            ),
-            images: nil
-        ))
-    }
-}

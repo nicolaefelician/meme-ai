@@ -1,5 +1,4 @@
 import SwiftUI
-import SuperwallKit
 
 struct PremiumFeaturesPreviewView: View {
     @Environment(\.dismiss) var dismiss
@@ -33,7 +32,7 @@ struct PremiumFeaturesPreviewView: View {
         VStack(spacing: 0) {
             // Header
             HStack {
-                Button("Cancel") {
+                Button(String(localized: "common.cancel")) {
                     dismiss()
                 }
                 .font(.system(size: 16, weight: .medium))
@@ -42,7 +41,7 @@ struct PremiumFeaturesPreviewView: View {
                 Spacer()
                 
                 VStack(spacing: 2) {
-                    Text("Unlock Premium Features")
+                    Text(String(localized: "premium.title"))
                         .font(.system(size: 18, weight: .bold))
                         .foregroundColor(.black)
                     
@@ -53,7 +52,7 @@ struct PremiumFeaturesPreviewView: View {
                 
                 Spacer()
                 
-                Text("Cancel")
+                Text(String(localized: "common.cancel"))
                     .font(.system(size: 16, weight: .medium))
                     .foregroundColor(.clear)
             }
@@ -78,14 +77,14 @@ struct PremiumFeaturesPreviewView: View {
                     dismiss()
                     // Small delay to ensure dismiss completes before showing paywall
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        Superwall.shared.register(placement: "campaign_trigger")
+                        SubscriptionManager.shared.showPaywall = true
                     }
                 }) {
                     HStack {
                         Image(systemName: "crown.fill")
                             .font(.system(size: 16, weight: .bold))
                         
-                        Text("Get Pro")
+                        Text(String(localized: "premium.cta.get_pro"))
                             .font(.system(size: 18, weight: .bold))
                     }
                     .foregroundColor(.white)
@@ -102,7 +101,7 @@ struct PremiumFeaturesPreviewView: View {
                     .shadow(color: .orange.opacity(0.3), radius: 8, x: 0, y: 4)
                 }
                 
-                Text("Unlock all premium features")
+                Text(String(localized: "premium.cta.subtitle"))
                     .font(.system(size: 14))
                     .foregroundColor(.gray)
             }
@@ -182,7 +181,7 @@ struct PremiumFeatureCard: View {
                             .font(.system(size: 40))
                             .foregroundColor(feature.color.opacity(0.6))
                         
-                        Text("Preview Coming Soon")
+                        Text(String(localized: "premium.preview_coming_soon"))
                             .font(.system(size: 16, weight: .medium))
                             .foregroundColor(.gray)
                     }
@@ -196,17 +195,4 @@ struct PremiumFeatureCard: View {
         }
         .padding(.vertical, 10)
     }
-}
-
-#Preview {
-    PremiumFeaturesPreviewView(coin: Coin(fromNotificationData: [
-        "id": "1",
-        "name": "Bitcoin",
-        "symbol": "BTC",
-        "price": "45000.0",
-        "marketCap": "900000000000.0",
-        "selfReportedMarketCap": "900000000000.0",
-        "priceChange24h": "-5.2",
-        "volume24h": "25000000000.0"
-    ]))
 }

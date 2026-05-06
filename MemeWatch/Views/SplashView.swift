@@ -7,6 +7,7 @@ struct SplashView: View {
     @State private var logoScale: CGFloat = 0.5
     
     @ObservedObject private var appManager = AppManager.shared
+    @ObservedObject private var subscriptionManager = SubscriptionManager.shared
     
     var body: some View {
         ZStack {
@@ -43,7 +44,7 @@ struct SplashView: View {
                     .shadow(color: .orange.opacity(0.3), radius: 20, x: 0, y: 10)
                     .scaleEffect(logoScale)
                 
-                Text("Meme AI")
+                Text(String(localized: "splash.app_name"))
                     .font(.custom(TextFonts.instrumentSansSemiBold.rawValue, size: 36))
                     .foregroundColor(.white)
                     .shadow(color: .black.opacity(0.2), radius: 2, x: 0, y: 2)
@@ -63,22 +64,22 @@ struct SplashView: View {
                 opacity = 1.0
                 logoScale = 1.0
             }
-            
-            Task {
-                await refreshData()
-            }
         }
         .task {
             AnalyticsManager.shared.logEvent(name: "app_launch")
+            await refreshData()
         }
     }
     
     func refreshData() async {
+        await OnboardingRemoteConfigManager.shared.fetchAndActivateConfig()
+        await subscriptionManager.loadOfferings()
+
         try? await CoinDataApi.shared.fetchFearAndGreedIndicator()
-        
+
         await UserApi.shared.loadWatchList()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             withAnimation {
                 appManager.showSplashView = false
             }

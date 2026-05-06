@@ -74,12 +74,11 @@ struct SettingsView: View {
     
     private func restorePurchases() {
         Task {
-            let result = await purchaseController.restorePurchases()
-            switch result {
-            case .restored:
+            let restored = await SubscriptionManager.shared.restorePurchases()
+            if restored {
                 print("✅ Purchases restored")
-            case .failed(let error):
-                print("❌ Failed to restore purchases: \(String(describing: error?.localizedDescription))")
+            } else {
+                print("❌ No active subscriptions found to restore")
             }
         }
     }
@@ -105,7 +104,7 @@ struct SettingsView: View {
                 
                 Text(title)
                     .font(.custom(TextFonts.instrumentSansSemiBold.rawValue, size: 18))
-                    .foregroundColor(.black.opacity(0.6))
+                    .foregroundColor(.black)
                     .padding(.leading, 5)
                 
                 Spacer()

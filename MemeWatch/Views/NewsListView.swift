@@ -1,5 +1,4 @@
 import SwiftUI
-import SuperwallKit
 
 struct NewsListView: View {
     @ObservedObject private var appManager = AppManager.shared
@@ -33,7 +32,7 @@ struct NewsListView: View {
                 impactFeedback.impactOccurred()
                 appManager.path.append(.newsDataView(newsId: news.id))
             } else {
-                Superwall.shared.register(placement: "campaign_trigger")
+                SubscriptionManager.shared.showPaywall = true
             }
             
         }) {
@@ -49,7 +48,7 @@ struct NewsListView: View {
                     
                     Spacer(minLength: 10)
                     
-                    Text("See more")
+                    Text(String(localized: "news.see_more"))
                         .font(.custom(TextFonts.interSemibold.rawValue, size: 12))
                         .foregroundColor(Color.orange)
                         .padding(.horizontal, 12)
@@ -79,7 +78,7 @@ struct NewsListView: View {
         ScrollView {
             if appManager.newsPreviews.isEmpty {
                 VStack {
-                    Text("Loading...")
+                    Text(String(localized: "common.loading"))
                         .font(.custom(TextFonts.interRegular.rawValue, size: 16))
                         .foregroundStyle(.black)
                     

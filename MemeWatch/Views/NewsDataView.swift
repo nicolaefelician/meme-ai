@@ -68,7 +68,7 @@ struct NewsDataView: View {
                 }
                 else {
                     VStack {
-                        Text("Loading...")
+                        Text(String(localized: "common.loading"))
                             .font(.custom(TextFonts.interRegular.rawValue, size: 16))
                             .foregroundStyle(.black)
                         
@@ -96,7 +96,7 @@ struct NewsDataView: View {
                             showWebView = true
                         }
                     }) {
-                        Text("Read Full Article")
+                        Text(String(localized: "news.read_full_article"))
                             .foregroundStyle(.white)
                             .font(.custom(TextFonts.interSemibold.rawValue, size: 20))
                             .padding(.vertical, 14)

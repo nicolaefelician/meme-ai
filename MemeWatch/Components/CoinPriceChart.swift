@@ -34,7 +34,7 @@ struct CoinPriceChart: View {
     var body: some View {
         GeometryReader { geometry in
             if priceList.isEmpty {
-                Text("No available data for this coin")
+                Text(String(localized: "chart.no_data"))
                     .foregroundColor(.gray)
                     .font(.custom(TextFonts.interSemibold.rawValue, size: 17))
                     .multilineTextAlignment(.center)

@@ -1,6 +1,5 @@
 import SwiftUI
 import Combine
-import SuperwallKit
 
 final class ContentViewModel: ObservableObject {
     @Published var selectedTabIndex: Int = 0
@@ -107,7 +106,7 @@ struct ContentView: View {
                     if !appManager.isPremiumUser {
                         ToolbarItem(placement: .topBarTrailing) {
                             Button(action: {
-                                Superwall.shared.register(placement: "campaign_trigger")
+                                SubscriptionManager.shared.showPaywall = true
                             }) {
                                 Image(systemName: "crown.fill")
                                     .resizable()
@@ -138,7 +137,7 @@ struct ContentView: View {
             .alert("Error", isPresented: $appManager.showError) {
                 Button("OK", role: .cancel) { }
             } message: {
-                Text("There was an error analyzing your coin. Please try again later.")
+                Text(String(localized: "common.analysis_error"))
             }
             
             if appManager.isLoading {
@@ -147,7 +146,7 @@ struct ContentView: View {
                     .edgesIgnoringSafeArea(.all)
                 
                 VStack {
-                    Text("Analyzing...")
+                    Text(String(localized: "common.analyzing"))
                         .font(.custom(TextFonts.interRegular.rawValue, size: 16))
                         .foregroundStyle(.black)
                     

@@ -129,13 +129,13 @@ struct AiChatView: View {
                                     .frame(width: 90, height: 90)
                                     .cornerRadius(45)
                                 
-                                Text("Chat with your personal AI!")
+                                Text(String(localized: "chat.empty.title"))
                                     .font(.headline)
                                     .foregroundColor(.white)
                                     .padding(.horizontal, 30)
                                     .multilineTextAlignment(.center)
-                                
-                                Text("Understand any chart with the help of the AI Chart Analysis! Take a photo of the chart and get instant information and details.")
+
+                                Text(String(localized: "chat.empty.subtitle"))
                                     .font(.subheadline)
                                     .foregroundColor(.gray)
                                     .multilineTextAlignment(.center)
@@ -164,13 +164,13 @@ struct AiChatView: View {
                     }
                     .actionSheet(isPresented: $viewModel.showAnalysisSheet) {
                         ActionSheet(
-                            title: Text("Choose Photo Source"),
+                            title: Text(String(localized: "chat.photo_source.title")),
                             buttons: [
-                                .default(Text("From Photos")) {
+                                .default(Text(String(localized: "chat.photo_source.from_photos"))) {
                                     sourceType = .photoLibrary
                                     isAnalysisImagePickerPresented = true
                                 },
-                                .default(Text("Take Photo")) {
+                                .default(Text(String(localized: "chat.photo_source.take_photo"))) {
                                     sourceType = .camera
                                     isAnalysisImagePickerPresented = true
                                 },
@@ -221,7 +221,7 @@ struct AiChatView: View {
                                     .foregroundColor(.black)
                             }
                             
-                            TextField("Type here...", text: $viewModel.inputText)
+                            TextField(String(localized: "chat.input.placeholder"), text: $viewModel.inputText)
                                 .padding(.horizontal, 5)
                                 .padding(.leading, 2)
                                 .background(.clear)
@@ -288,13 +288,13 @@ struct AiChatView: View {
                         }
                         .actionSheet(isPresented: $viewModel.showActionSheet) {
                             ActionSheet(
-                                title: Text("Choose Photo Source"),
+                                title: Text(String(localized: "chat.photo_source.title")),
                                 buttons: [
-                                    .default(Text("From Photos")) {
+                                    .default(Text(String(localized: "chat.photo_source.from_photos"))) {
                                         sourceType = .photoLibrary
                                         isImagePickerPresented = true
                                     },
-                                    .default(Text("Take Photo")) {
+                                    .default(Text(String(localized: "chat.photo_source.take_photo"))) {
                                         sourceType = .camera
                                         isImagePickerPresented = true
                                     },

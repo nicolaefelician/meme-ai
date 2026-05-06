@@ -161,14 +161,14 @@ struct CoinDataView: View {
                         .padding(.top, 30)
                         .padding(.bottom, 13)
                         
-                        Text("Details")
+                        Text(String(localized: "coin.details"))
                             .font(.custom(TextFonts.instrumentSansSemiBold.rawValue, size: 25))
                             .foregroundStyle(.black)
                             .padding(.horizontal, 20)
                             .padding(.bottom, 7)
                         
                         if coinData.description.isEmpty {
-                            Text("No description available for this coin.")
+                            Text(String(localized: "coin.no_description"))
                                 .multilineTextAlignment(.leading)
                                 .font(.custom(TextFonts.interRegular.rawValue, size: 15))
                                 .foregroundStyle(.black)
@@ -186,7 +186,7 @@ struct CoinDataView: View {
                                     viewModel.showFullDescription.toggle()
                                 }
                             }) {
-                                Text(viewModel.showFullDescription ? "View Less" : "Read More")
+                                Text(viewModel.showFullDescription ? String(localized: "coin.view_less") : String(localized: "coin.read_more"))
                                     .font(.custom(TextFonts.interSemibold.rawValue, size: 16))
                                     .foregroundStyle(.black.opacity(0.8))
                             }
@@ -205,7 +205,7 @@ struct CoinDataView: View {
                                         .scaledToFit()
                                         .frame(width: 24, height: 24)
                                     
-                                    Text("Share")
+                                    Text(String(localized: "coin.share"))
                                         .font(.custom(TextFonts.interSemibold.rawValue, size: 15))
                                         .foregroundStyle(.black)
                                 }
@@ -234,7 +234,7 @@ struct CoinDataView: View {
                                         .scaledToFit()
                                         .frame(width: 24, height: 24)
                                     
-                                    Text("Get Analysis")
+                                    Text(String(localized: "coin.get_analysis"))
                                         .font(.custom(TextFonts.interSemibold.rawValue, size: 15))
                                         .foregroundStyle(.white)
                                 }
@@ -247,7 +247,7 @@ struct CoinDataView: View {
                         .padding(.horizontal, 20)
                         .padding(.top, 13)
                         
-                        Text("Statistics")
+                        Text(String(localized: "coin.statistics"))
                             .font(.custom(TextFonts.instrumentSansSemiBold.rawValue, size: 25))
                             .foregroundStyle(.black)
                             .padding(.horizontal, 20)
@@ -259,7 +259,7 @@ struct CoinDataView: View {
                                 Text("#\(coinData.statistics.rank)")
                                     .font(.custom(TextFonts.interMedium.rawValue, size: 15))
                                     .foregroundStyle(.black)
-                                Text("rank")
+                                Text(String(localized: "coin.stat.rank"))
                                     .font(.custom(TextFonts.interMedium.rawValue, size: 14))
                                     .foregroundStyle(.gray)
                             }
@@ -280,7 +280,7 @@ struct CoinDataView: View {
                                         .font(.custom(TextFonts.interMedium.rawValue, size: 15))
                                         .foregroundStyle(.black)
                                 }
-                                Text("market cap")
+                                Text(String(localized: "coin.stat.market_cap"))
                                     .font(.custom(TextFonts.interMedium.rawValue, size: 14))
                                     .foregroundStyle(.gray)
                             }
@@ -301,7 +301,7 @@ struct CoinDataView: View {
                                         .font(.custom(TextFonts.interMedium.rawValue, size: 15))
                                         .foregroundStyle(.black)
                                 }
-                                Text("volume")
+                                Text(String(localized: "coin.stat.volume"))
                                     .font(.custom(TextFonts.interMedium.rawValue, size: 14))
                                     .foregroundStyle(.gray)
                             }
@@ -326,7 +326,7 @@ struct CoinDataView: View {
                                         .font(.custom(TextFonts.interMedium.rawValue, size: 15))
                                         .foregroundStyle(.black)
                                 }
-                                Text("total supply")
+                                Text(String(localized: "coin.stat.total_supply"))
                                     .font(.custom(TextFonts.interMedium.rawValue, size: 14))
                                     .foregroundStyle(.gray)
                             }
@@ -347,7 +347,7 @@ struct CoinDataView: View {
                                         .font(.custom(TextFonts.interMedium.rawValue, size: 15))
                                         .foregroundStyle(.black)
                                 }
-                                Text("added date")
+                                Text(String(localized: "coin.stat.added_date"))
                                     .font(.custom(TextFonts.interMedium.rawValue, size: 14))
                                     .foregroundStyle(.gray)
                             }
@@ -369,7 +369,7 @@ struct CoinDataView: View {
                                             .frame(width: 23, height: 23)
                                             .foregroundColor(.blue)
                                         
-                                        Text("Website")
+                                        Text(String(localized: "coin.link.website"))
                                             .font(.custom(TextFonts.interMedium.rawValue, size: 15))
                                             .foregroundColor(.black)
                                     }
@@ -389,7 +389,7 @@ struct CoinDataView: View {
                                             .frame(width: 25, height: 25)
                                             .foregroundColor(.blue)
                                         
-                                        Text("Twitter")
+                                        Text(String(localized: "coin.link.twitter"))
                                             .font(.custom(TextFonts.interMedium.rawValue, size: 15))
                                             .foregroundColor(.black)
                                     }
@@ -404,7 +404,7 @@ struct CoinDataView: View {
                         .padding(.bottom, 10)
                         
                         if let holders = coinData.holders {
-                            Text("Top 5 holders")
+                            Text(String(localized: "coin.holders.top5_title"))
                                 .font(.custom(TextFonts.instrumentSansSemiBold.rawValue, size: 25))
                                 .foregroundStyle(.black)
                                 .padding(.horizontal, 20)
@@ -415,7 +415,7 @@ struct CoinDataView: View {
                                 ForEach(holders.holderList.prefix(5), id: \.address) { info in
                                     HStack {
                                         VStack(alignment: .leading) {
-                                            Text("Address")
+                                            Text(String(localized: "coin.holders.address"))
                                                 .font(.custom(TextFonts.interMedium.rawValue, size: 14))
                                                 .foregroundColor(.gray)
                                             
@@ -440,7 +440,7 @@ struct CoinDataView: View {
                                         }
                                         
                                         VStack(alignment: .trailing) {
-                                            Text("Balance")
+                                            Text(String(localized: "coin.holders.balance"))
                                                 .font(.custom(TextFonts.interMedium.rawValue, size: 14))
                                                 .foregroundColor(.gray)
                                             
@@ -458,7 +458,7 @@ struct CoinDataView: View {
                             }
                             .padding(.horizontal, 20)
                             
-                            Text("Holders share")
+                            Text(String(localized: "coin.holders.share_title"))
                                 .font(.custom(TextFonts.instrumentSansSemiBold.rawValue, size: 25))
                                 .foregroundStyle(.black)
                                 .padding(.horizontal, 20)
@@ -467,7 +467,7 @@ struct CoinDataView: View {
                             
                             HStack(spacing: 9) {
                                 VStack {
-                                    Text("Top 10")
+                                    Text(String(localized: "coin.holders.top10"))
                                         .font(.custom(TextFonts.interMedium.rawValue, size: 15))
                                         .foregroundStyle(.black)
                                     
@@ -481,7 +481,7 @@ struct CoinDataView: View {
                                 .cornerRadius(10)
                                 
                                 VStack {
-                                    Text("Top 50")
+                                    Text(String(localized: "coin.holders.top50"))
                                         .font(.custom(TextFonts.interMedium.rawValue, size: 15))
                                         .foregroundStyle(.black)
                                     
@@ -495,7 +495,7 @@ struct CoinDataView: View {
                                 .cornerRadius(10)
                                 
                                 VStack {
-                                    Text("Top 100")
+                                    Text(String(localized: "coin.holders.top100"))
                                         .font(.custom(TextFonts.interMedium.rawValue, size: 15))
                                         .foregroundStyle(.black)
                                     
@@ -513,7 +513,7 @@ struct CoinDataView: View {
                         
                         if !viewModel.postsList.isEmpty {
                             VStack(alignment: .leading, spacing: 15) {
-                                Text("Trending Posts")
+                                Text(String(localized: "coin.trending_posts"))
                                     .font(.custom(TextFonts.instrumentSansSemiBold.rawValue, size: 25))
                                     .foregroundStyle(.black)
                                     .padding(.horizontal, 20)
@@ -559,7 +559,7 @@ struct CoinDataView: View {
                                     Text(contractInfo.first!.contractPlatform)
                                         .font(.custom(TextFonts.instrumentSansSemiBold.rawValue, size: 18))
                                         .foregroundStyle(.black)
-                                    Text("Contract Network")
+                                    Text(String(localized: "coin.contract.network"))
                                         .font(.custom(TextFonts.interMedium.rawValue, size: 14))
                                         .foregroundStyle(.gray)
                                 }
@@ -569,7 +569,7 @@ struct CoinDataView: View {
                             
                             HStack {
                                 VStack(alignment: .leading) {
-                                    Text("Address")
+                                    Text(String(localized: "coin.contract.address"))
                                         .font(.custom(TextFonts.interMedium.rawValue, size: 16))
                                         .foregroundStyle(.gray)
                                     Text(contractInfo.first!.contractAddress)
@@ -595,7 +595,7 @@ struct CoinDataView: View {
                                             .scaledToFit()
                                             .frame(width: 25, height: 25)
                                             .foregroundStyle(.blue)
-                                        Text(viewModel.isCopied ? "copied" : "copy")
+                                        Text(viewModel.isCopied ? String(localized: "coin.contract.copied") : String(localized: "coin.contract.copy"))
                                             .font(.custom(TextFonts.interMedium.rawValue, size: 16))
                                             .foregroundStyle(.blue)
                                     }
@@ -616,7 +616,7 @@ struct CoinDataView: View {
                                         .scaledToFit()
                                         .frame(width: 28, height: 28)
                                     
-                                    Text("Trade on Phantom")
+                                    Text(String(localized: "coin.trade.phantom"))
                                         .font(.custom(TextFonts.interMedium.rawValue, size: 17))
                                         .foregroundColor(.white)
                                 }
@@ -661,7 +661,7 @@ struct CoinDataView: View {
                                         .scaledToFit()
                                         .frame(width: 28, height: 28)
                                     
-                                    Text("Trade on Uniswap")
+                                    Text(String(localized: "coin.trade.uniswap"))
                                         .font(.custom(TextFonts.interMedium.rawValue, size: 17))
                                         .foregroundColor(.white)
                                 }
@@ -685,7 +685,7 @@ struct CoinDataView: View {
                                         .scaledToFit()
                                         .frame(width: 28, height: 28)
                                     
-                                    Text("Trade on Raydium")
+                                    Text(String(localized: "coin.trade.raydium"))
                                         .font(.custom(TextFonts.interMedium.rawValue, size: 17))
                                         .foregroundColor(.white)
                                 }
@@ -722,10 +722,10 @@ struct CoinDataView: View {
             
         } else {
             VStack {
-                Text("Loading...")
+                Text(String(localized: "common.loading"))
                     .font(.custom(TextFonts.interRegular.rawValue, size: 16))
                     .foregroundStyle(.black)
-                
+
                 ProgressView()
                     .foregroundStyle(.black)
             }

@@ -7,7 +7,10 @@ final class UserApi {
     static let shared = UserApi()
     
     func registerUser(firebaseId: String) async throws {
-        guard let url = URL(string: "https://center.tocaas.com/api/user/register-user?applicationCode=\(Consts.shared.appCode)") else { throw URLError(.badURL) }
+        print("Is user registered: \(Consts.shared.isUserRegistered)")
+        guard !Consts.shared.isUserRegistered else { return }
+        
+        guard let url = URL(string: "https://memo-coin-api-production.up.railway.app/api/user/register-user?applicationCode=\(Consts.shared.appCode)") else { throw URLError(.badURL) }
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -16,6 +19,7 @@ final class UserApi {
         let requestBody: [String: Any] = [
             "appVersion": Consts.shared.appVersion,
             "fireBaseId": firebaseId,
+            "userId": Consts.shared.appUserId,
             "customData": ["": ""]
         ]
         
@@ -24,6 +28,8 @@ final class UserApi {
             request.httpBody = jsonData
             
             let (data, response) = try await safeSession().data(for: request)
+            
+            print("User register data: \(String(decoding: data, as: UTF8.self))")
             
             guard let httpResponse = response as? HTTPURLResponse else {
                 throw URLError(.badServerResponse)
@@ -35,11 +41,7 @@ final class UserApi {
             
             if let jsonResponse = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
                 print("Registration response: \(jsonResponse)")
-                
-                if let userId = jsonResponse["id"] as? String {
-                    Consts.shared.saveToSharedDefaults(key: "userId", value: userId)
-                    print("User ID saved to both standard and shared UserDefaults: \(userId)")
-                }
+                Consts.shared.setUserRegistered()
             }
         } catch {
             print("Registration error: \(error.localizedDescription)")

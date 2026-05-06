@@ -10,16 +10,35 @@ final class Consts {
     let cardColor: Color = Color(hex: "#e7e7e7")
     
     let revenueCatApiKey: String = "appl_LLBLyrAeBElmNCSAceowEYvAEvB"
-    let superwallApiKey: String = "pk_2e4bce9df65c721b1f9630fe0921ad3c1a8b686a1245ea0d"
     
     let appCode = "meme-ai"
     let appVersion = "1.0.6"
-    let firebaseTokenId = ""
+    let userRegisterKey = "user_register"
     
     let appGroupIdentifier = "group.com.pileus.memewatch.shared"
     
-    let openAiApiKey = "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"
+    let userIdKey = "userId"
     
+    var appUserId: String {
+        if let id = UserDefaults.standard.string(forKey: userIdKey) {
+            return id
+        } else {
+            let id = UUID().uuidString
+            UserDefaults.standard.set(id, forKey: userIdKey)
+            return id
+        }
+    }
+    
+    var isUserRegistered: Bool {
+        return UserDefaults.standard.bool(forKey: userRegisterKey)
+    }
+    
+    let useOnboardingV2: Bool = true
+    
+    func setUserRegistered() {
+        UserDefaults.standard.set(true, forKey: userRegisterKey)
+    }
+
     func loadContent() {
         AppManager.shared.showOnboarding = !UserDefaults.standard.bool(forKey: "hasShownOnboarding")
     }

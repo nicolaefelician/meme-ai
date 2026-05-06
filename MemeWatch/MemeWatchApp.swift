@@ -1,57 +1,35 @@
 import SwiftUI
 import Firebase
 import RevenueCat
-import SuperwallKit
 import FirebaseMessaging
+import FirebaseRemoteConfig
 
 final class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
-        
+
         Consts.shared.loadContent()
-        
-        Purchases.logLevel = .debug
-        Purchases.configure(withAPIKey: Consts.shared.revenueCatApiKey)
-        
-        Purchases.shared.getCustomerInfo { (customerInfo, error) in
-            AppManager.shared.isPremiumUser = customerInfo?.entitlements.all["Pro"]?.isActive == true
-        }
-        
-        Superwall.configure(apiKey: Consts.shared.superwallApiKey, purchaseController: purchaseController)
-        
-        purchaseController.syncSubscriptionStatus()
-        
+
+        Purchases.configure(withAPIKey: Consts.shared.revenueCatApiKey, appUserID: Consts.shared.appUserId)
+
+        SubscriptionManager.shared.fetchSubscriptionStatus()
+        SubscriptionManager.shared.listenForSubscriptionUpdates()
+
         UNUserNotificationCenter.current().delegate = self
-        
-        Task {
-            await handleNotificationPermissions(application: application)
-        }
-        
-        return true
-    }
-    
-    @MainActor
-    private func handleNotificationPermissions(application: UIApplication) async {
-        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-        do {
-            let granted = try await UNUserNotificationCenter.current().requestAuthorization(options: authOptions)
-            print("Notification authorization granted: \(granted)")
-        } catch {
-            print("Notification authorization error: \(error.localizedDescription)")
-        }
-        
-        application.registerForRemoteNotifications()
-        
         Messaging.messaging().delegate = self
+
+        return true
     }
 }
 
 @main
 struct MemeWatchApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    
+
     @ObservedObject private var appManager = AppManager.shared
-    
+    @ObservedObject private var subscriptionManager = SubscriptionManager.shared
+    @ObservedObject private var onboardingConfig = OnboardingRemoteConfigManager.shared
+
     var body: some Scene {
         WindowGroup {
             ZStack {
@@ -60,9 +38,15 @@ struct MemeWatchApp: App {
                         .preferredColorScheme(.light)
                         .zIndex(1)
                 } else if appManager.showOnboarding {
-                    OnboardingView()
-                        .preferredColorScheme(.light)
-                        .transition(.opacity)
+                    if onboardingConfig.onboardingVariant == .b {
+                        OnboardingVBView()
+                            .preferredColorScheme(.dark)
+                            .transition(.opacity)
+                    } else {
+                        OnboardingVAView()
+                            .preferredColorScheme(.light)
+                            .transition(.opacity)
+                    }
                 } else {
                     ContentView()
                         .preferredColorScheme(.light)
@@ -71,6 +55,9 @@ struct MemeWatchApp: App {
             }
             .animation(.easeInOut, value: appManager.showSplashView)
             .animation(.easeInOut, value: appManager.showOnboarding)
+            .sheet(isPresented: $subscriptionManager.showPaywall) {
+                PaywallView()
+            }
         }
     }
 }

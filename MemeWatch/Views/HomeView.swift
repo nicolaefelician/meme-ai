@@ -1,5 +1,4 @@
 import SwiftUI
-import SuperwallKit
 
 final class HomeViewModel: ObservableObject {
     @Published var selectedTimeRange: TimeRange = .oneHour
@@ -115,7 +114,7 @@ struct HomeView: View {
                 }
                 .padding(.leading, 18)
                 
-                Text("Trending now 🔥")
+                Text(String(localized: "home.trending_now"))
                     .padding(.top, 5)
                     .font(.custom(TextFonts.instrumentSansSemiBold.rawValue, size: 23))
                     .foregroundStyle(.black)
@@ -163,7 +162,7 @@ struct HomeView: View {
                 }
                 
                 HStack {
-                    Text("Time range: \(viewModel.selectedTimeRange.rawValue)")
+                    Text(String(format: String(localized: "home.time_range"), viewModel.selectedTimeRange.rawValue))
                         .font(.custom(TextFonts.interRegular.rawValue, size: 16))
                         .foregroundStyle(Color(hex: "#000000"))
                     
@@ -220,13 +219,13 @@ struct HomeView: View {
                 .padding(.bottom, 7)
                 
                 HStack {
-                    Text("Market Cap")
+                    Text(String(localized: "home.column.market_cap"))
                         .font(.custom(TextFonts.interMedium.rawValue, size: 16))
                         .foregroundStyle(.gray)
-                    
+
                     Spacer()
-                    
-                    Text("Price")
+
+                    Text(String(localized: "home.column.price"))
                         .font(.custom(TextFonts.interMedium.rawValue, size: 16))
                         .foregroundStyle(.gray)
                     
@@ -248,11 +247,11 @@ struct HomeView: View {
                                 .frame(width: 60, height: 60)
                                 .foregroundColor(.gray.opacity(0.6))
                             
-                            Text("Your Watchlist is Empty")
+                            Text(String(localized: "home.watchlist.empty_title"))
                                 .font(.custom(TextFonts.instrumentSansSemiBold.rawValue, size: 18))
                                 .foregroundColor(.black)
-                            
-                            Text("Save your favorite coins to track them here.")
+
+                            Text(String(localized: "home.watchlist.empty_subtitle"))
                                 .font(.custom(TextFonts.interRegular.rawValue, size: 16))
                                 .foregroundColor(.gray.opacity(0.7))
                                 .multilineTextAlignment(.center)
@@ -262,10 +261,10 @@ struct HomeView: View {
                     } else {
                         if viewModel.isLoading {
                             VStack {
-                                Text("Loading...")
+                                Text(String(localized: "common.loading"))
                                     .font(.custom(TextFonts.interRegular.rawValue, size: 16))
                                     .foregroundStyle(.black)
-                                
+
                                 ProgressView()
                                     .foregroundStyle(.black)
                             }

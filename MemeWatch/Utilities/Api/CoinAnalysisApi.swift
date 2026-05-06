@@ -109,21 +109,15 @@ final class CoinAnalysisApi {
     }
     
     func fetchChatResponse(_ input: String, history: [ChatMessage], images: [String]) async throws -> AsyncThrowingStream<String, Error> {
-        guard let url = URL(string: "https://api.openai.com/v1/chat/completions") else { throw URLError(.badURL) }
-        
-        print("=== fetchChatResponse API Request Started ===")
-        print("URL: \(url)")
-        print("Input: \(input)")
-        print("History count: \(history.count)")
-        print("Images count: \(images.count)")
-        
+        guard let url = URL(string: "https://memo-coin-api-production.up.railway.app/api/chatgpt/chat") else { throw URLError(.badURL) }
+
         var messages: [[String: Any]] = [
             [
                 "role": "system",
                 "content": systemPrompt
             ]
         ]
-        
+
         history.forEach { chatHistory in
             messages.append([
                 "role": "user",
@@ -134,36 +128,33 @@ final class CoinAnalysisApi {
                 "content": chatHistory.responseText ?? ""
             ])
         }
-        
+
         var userMessageContent: [[String: Any]] = [
             ["type": "text", "text": input],
         ]
-        
+
         images.forEach { image in
             userMessageContent.append(
                 ["type": "image_url", "image_url": ["url": "data:image/jpeg;base64,\(image)"]]
             )
         }
-        
+
         messages.append([
             "role": "user",
             "content": userMessageContent,
         ])
-        
+
         let requestBody: [String: Any] = [
-            "model": "gpt-4o-mini",
             "messages": messages,
             "stream": true,
         ]
-        
-        print("Request body model: \(requestBody["model"] ?? "unknown")")
+
         print("Total messages in request: \(messages.count)")
-        
+
         let headers = [
             "Content-Type": "application/json",
-            "Authorization": "Bearer \(Consts.shared.openAiApiKey)"
         ]
-        
+
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.allHTTPHeaderFields = headers
@@ -270,25 +261,23 @@ final class CoinAnalysisApi {
             return nil
         }
         
-        let url = URL(string: "https://api.openai.com/v1/chat/completions")!
-        
+        let url = URL(string: "https://memo-coin-api-production.up.railway.app/api/chatgpt/chat")!
+
         let headers = [
             "Content-Type": "application/json",
-            "Authorization": "Bearer \(Consts.shared.openAiApiKey)"
         ]
-        
+
         let requestBody: [String: Any] = [
-            "model": "gpt-4o-mini",
             "messages": [
                 [
                     "role": "system",
                     "content": """
                         \(systemPrompt)
-                    
+
                         \(jsonParams)
-                    
+
                         If the provided image cannot be loaded or there is an error with it, please return a **general analysis** of the meme coin and market in the same format (with appropriate dummy content) as shown below:
-                    
+
                         \(sampleJsonPrompt)
                     """,
                 ],
@@ -301,14 +290,14 @@ final class CoinAnalysisApi {
                 ]
             ]
         ]
-        
+
         guard let jsonData = try? JSONSerialization.data(withJSONObject: requestBody, options: []) else {
             print("Error: Unable to serialize JSON")
             return nil
         }
-        
+
         var request = URLRequest(url: url)
-        
+
         request.httpMethod = "POST"
         request.allHTTPHeaderFields = headers
         request.httpBody = jsonData
@@ -317,29 +306,27 @@ final class CoinAnalysisApi {
     }
     
     func getCoinAnalysis(coinData: CoinData, priceList: [Double], timeRange: CoinPriceChartTimeRange) async -> CoinAnalysis? {
-        let url = URL(string: "https://api.openai.com/v1/chat/completions")!
-        
+        let url = URL(string: "https://memo-coin-api-production.up.railway.app/api/chatgpt/chat")!
+
         let headers = [
             "Content-Type": "application/json",
-            "Authorization": "Bearer \(Consts.shared.openAiApiKey)"
         ]
-        
+
         let priceListFormatted = priceList.enumerated().map { index, price in
             "\"\(index + 1)\": \(price)"
         }.joined(separator: ", ")
         
         let requestBody: [String: Any] = [
-            "model": "gpt-4o-mini",
             "messages": [
                 [
                     "role": "system",
                     "content": """
                         \(systemPrompt)
-                    
+
                         \(jsonParams)
-                    
+
                         If insufficient data is provided, return a general market analysis in the same JSON format.
-                    
+
                         \(sampleJsonPrompt)
                     """,
                 ],

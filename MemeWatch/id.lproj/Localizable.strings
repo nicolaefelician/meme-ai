@@ -1,0 +1,283 @@
+// MARK: - Common
+"common.loading" = "Memuat...";
+"common.analyzing" = "Menganalisis...";
+"common.analysis_error" = "Terjadi kesalahan saat menganalisis koin Anda. Silakan coba lagi nanti.";
+"common.cancel" = "Batal";
+
+// MARK: - Splash
+"splash.app_name" = "Meme AI";
+
+// MARK: - Paywall
+"paywall.title" = "Buka Kunci Meme AI Pro";
+"paywall.subtitle" = "Dapatkan akses tak terbatas ke analisis AI,\nberita terkini, dan grafik canggih.";
+
+// Features
+"paywall.feature.ai_analysis" = "Analisis grafik & koin berbasis AI";
+"paywall.feature.news" = "Berita real-time dengan sentimen pasar";
+"paywall.feature.charts" = "Grafik harga canggih";
+"paywall.feature.alerts" = "Peringatan pasar prioritas";
+
+// Plans — %@ is replaced with the localised price string from the App Store
+"paywall.plan.monthly.label" = "Bulanan";
+"paywall.plan.monthly.badge" = "Paling Populer";
+"paywall.plan.monthly.detail" = "%@ / bulan";
+
+"paywall.plan.weekly.label" = "Mingguan";
+"paywall.plan.weekly.detail" = "%@ / minggu";
+
+// CTAs
+"paywall.cta.subscribe" = "Berlangganan Sekarang";
+"paywall.cta.restore" = "Pulihkan Pembelian";
+
+// Legal / errors
+"paywall.legal.disclaimer" = "Langganan diperbarui otomatis. Batalkan kapan saja di pengaturan App Store.";
+"paywall.error.no_subscriptions" = "Tidak ada langganan aktif yang ditemukan.";
+
+// MARK: - Premium Features Preview
+"premium.title" = "Buka Kunci Fitur Premium";
+"premium.cta.get_pro" = "Dapatkan Pro";
+"premium.cta.subtitle" = "Buka semua fitur premium";
+"premium.preview_coming_soon" = "Pratinjau Segera Hadir";
+
+// MARK: - Onboarding
+"onboarding.skip" = "Lewati";
+
+// MARK: - Onboarding V2
+
+// Shared
+"onboarding_v2.cta.continue" = "Lanjutkan";
+
+// Welcome
+"onboarding_v2.welcome.live_badge" = "LIVE · 12.847 KOIN DILACAK";
+"onboarding_v2.welcome.headline1" = "Tangkap meme";
+"onboarding_v2.welcome.headline2" = "sebelum pump.";
+"onboarding_v2.welcome.subtitle" = "Notifikasi real-time, feed top movers, dan analisis AI — semua dalam satu aplikasi.";
+"onboarding_v2.welcome.cta" = "Mulai";
+
+// Social Proof
+"onboarding_v2.social.headline" = "Kamu bergabung\ndengan yang terbaik.";
+"onboarding_v2.social.subtitle" = "Para trader menggunakan MemeAI untuk menemukan 100x berikutnya — setiap menit setiap hari.";
+"onboarding_v2.social.stat1.value" = "247K+";
+"onboarding_v2.social.stat1.label" = "Trader aktif";
+"onboarding_v2.social.stat1.sub" = "Dari 84 negara";
+"onboarding_v2.social.stat2.value" = "$1.2M";
+"onboarding_v2.social.stat2.label" = "Dilacak harian";
+"onboarding_v2.social.stat2.sub" = "Volume meme coin";
+"onboarding_v2.social.stat3.value" = "4.8★";
+"onboarding_v2.social.stat3.label" = "App Store";
+"onboarding_v2.social.stat3.sub" = "12.400 ulasan";
+"onboarding_v2.social.stat4.value" = "12.8K";
+"onboarding_v2.social.stat4.label" = "Koin dilacak";
+"onboarding_v2.social.stat4.sub" = "6 chain, real-time";
+
+// Alerts
+"onboarding_v2.alerts.app_name" = "MemeAI";
+"onboarding_v2.alerts.headline1" = "Jangan lewatkan\n";
+"onboarding_v2.alerts.headline_accent" = "pump";
+"onboarding_v2.alerts.headline2" = " lagi.";
+"onboarding_v2.alerts.subtitle" = "Dapatkan notifikasi saat koin melonjak, whale beli, atau token baru listing.";
+"onboarding_v2.alerts.alert1.title" = "PEPE naik 47% dalam 1j";
+"onboarding_v2.alerts.alert1.body" = "Vol +$24M. 3 dompet whale membeli dalam 4 menit terakhir.";
+"onboarding_v2.alerts.alert1.time" = "sekarang";
+"onboarding_v2.alerts.alert2.title" = "Alert whale: WIF";
+"onboarding_v2.alerts.alert2.body" = "Dompet 0x9a..3f membeli $1.2M WIF.";
+"onboarding_v2.alerts.alert2.time" = "2m";
+"onboarding_v2.alerts.alert3.title" = "Token baru trending";
+"onboarding_v2.alerts.alert3.body" = "$BANANA listing 2j lalu, vol +8x. 184 holder.";
+"onboarding_v2.alerts.alert3.time" = "6m";
+
+// Feed
+"onboarding_v2.feed.headline1" = "Top movers,";
+"onboarding_v2.feed.headline2" = "diperbarui ";
+"onboarding_v2.feed.headline_accent" = "langsung.";
+"onboarding_v2.feed.subtitle" = "Lihat apa yang sedang naik. Urutkan berdasarkan volume, holder, umur, atau aktivitas sosial.";
+
+// Experience
+"onboarding_v2.experience.headline" = "Seberapa dalam\nkamu di dunia ini?";
+"onboarding_v2.experience.subtitle" = "Kami akan menyesuaikan feed sesuai levelmu.";
+"onboarding_v2.experience.option1.title" = "Sekadar penasaran";
+"onboarding_v2.experience.option1.sub" = "Baru di meme — tunjukkan dasarnya";
+"onboarding_v2.experience.option2.title" = "Trader santai";
+"onboarding_v2.experience.option2.sub" = "Punya beberapa koin, ingin sinyal lebih baik";
+"onboarding_v2.experience.option3.title" = "Full degen";
+"onboarding_v2.experience.option3.sub" = "Aping tiap hari, beri saya keunggulan";
+"onboarding_v2.experience.option4.title" = "Whale / pro";
+"onboarding_v2.experience.option4.sub" = "Multi-dompet, data canggih";
+
+// Chains
+"onboarding_v2.chains.headline" = "Chain mana\nyang kamu trade?";
+"onboarding_v2.chains.subtitle" = "Pilih semua yang sesuai.";
+"onboarding_v2.chains.sol.sub" = "Pump.fun, Raydium";
+"onboarding_v2.chains.base.sub" = "Coinbase L2";
+"onboarding_v2.chains.eth.sub" = "Uniswap, ERC-20";
+"onboarding_v2.chains.bsc.sub" = "PancakeSwap";
+"onboarding_v2.chains.tron.sub" = "SunPump";
+"onboarding_v2.chains.all.title" = "Lacak semua chain";
+"onboarding_v2.chains.all.sub" = "Direkomendasikan";
+
+// Goals
+"onboarding_v2.goals.headline" = "Apa keunggulan\nkamu?";
+"onboarding_v2.goals.subtitle" = "Pilih prioritas utama — kami akan menampilkannya lebih dulu.";
+"onboarding_v2.goals.cta" = "Buat feed saya";
+"onboarding_v2.goals.goal1.title" = "Tangkap pump lebih awal";
+"onboarding_v2.goals.goal1.sub" = "Notifikasi lonjakan real-time";
+"onboarding_v2.goals.goal2.title" = "Lacak dompet whale";
+"onboarding_v2.goals.goal2.sub" = "Lihat apa yang dibeli smart money";
+"onboarding_v2.goals.goal3.title" = "Temukan token baru";
+"onboarding_v2.goals.goal3.sub" = "Koin trending di bawah 24 jam";
+"onboarding_v2.goals.goal4.title" = "Ikuti aktivitas sosial";
+"onboarding_v2.goals.goal4.sub" = "Mention di X, aktivitas dev";
+"onboarding_v2.goals.goal5.title" = "Lacak portofolio saya";
+"onboarding_v2.goals.goal5.sub" = "P&L di semua dompet";
+
+// Notify
+"onboarding_v2.notify.notif_time" = "sekarang";
+"onboarding_v2.notify.notif_title" = "🚀 PEPE breaking out";
+"onboarding_v2.notify.notif_body" = "Naik 18% dalam 5 menit. Volume 4x rata-rata.";
+"onboarding_v2.notify.headline" = "Jangan tidur\ndan lewatkan 100x berikutnya.";
+"onboarding_v2.notify.subtitle" = "Aktifkan notifikasi dan kami akan memberi tahu kamu saat ada pergerakan. Bisa dikustomisasi.";
+"onboarding_v2.notify.cta.enable" = "Aktifkan notifikasi";
+"onboarding_v2.notify.cta.skip" = "Mungkin nanti";
+
+// Analyzing
+"onboarding_v2.analyzing.headline" = "Membangun feed kamu…";
+"onboarding_v2.analyzing.step1" = "Memindai 12.847 koin…";
+"onboarding_v2.analyzing.step2" = "Memeriksa dompet terbaik…";
+"onboarding_v2.analyzing.step3" = "Menyesuaikan notifikasi dengan tujuanmu…";
+"onboarding_v2.analyzing.step4" = "Membangun feed personalmu…";
+
+// Reviews
+"onboarding_v2.reviews.rating_sub" = "Berdasarkan 12.400+ ulasan App Store";
+"onboarding_v2.reviews.headline" = "Para trader\nsudah cuan.";
+"onboarding_v2.reviews.review1.title" = "Dapat 40x berkat ini";
+"onboarding_v2.reviews.review1.body" = "MemeAI memberi tahu saya detik BONK mulai bergerak. Saya pasti ketiduran. Aplikasi ini benar-benar membayar dirinya sendiri.";
+"onboarding_v2.reviews.review2.title" = "Menggantikan 4 aplikasi lain";
+"onboarding_v2.reviews.review2.body" = "Lacak whale + notifikasi + portofolio dalam satu tempat. Kualitas sinyal luar biasa dibanding yang lain.";
+"onboarding_v2.reviews.review3.title" = "Aplikasi terbaik di App Store";
+"onboarding_v2.reviews.review3.body" = "Saya untung 12k bulan ini hanya dari notifikasi. UI bersih, data cepat. Sempurna.";
+
+// Paywall V2
+"onboarding_v2.paywall.badge" = "MemeAI PRO";
+"onboarding_v2.paywall.headline" = "Buka\nkeunggulan penuh.";
+"onboarding_v2.paywall.subtitle" = "Batalkan kapan saja. Tanpa biaya tersembunyi.";
+"onboarding_v2.paywall.feature1" = "Notifikasi real-time tanpa batas";
+"onboarding_v2.paywall.feature2" = "Analisis grafik berbasis AI";
+"onboarding_v2.paywall.feature3" = "Feed penemuan token baru";
+"onboarding_v2.paywall.feature4" = "Grafik canggih & data on-chain";
+"onboarding_v2.paywall.feature5" = "Dukungan prioritas";
+"onboarding_v2.paywall.plan.weekly.title" = "Mingguan";
+"onboarding_v2.paywall.plan.weekly.detail" = "Ditagih %@/minggu";
+"onboarding_v2.paywall.plan.weekly.period" = "/mg";
+"onboarding_v2.paywall.plan.weekly.badge" = "POPULER";
+"onboarding_v2.paywall.plan.monthly.title" = "Bulanan";
+"onboarding_v2.paywall.plan.monthly.detail" = "Ditagih %@/bulan";
+"onboarding_v2.paywall.plan.monthly.period" = "/bln";
+"onboarding_v2.paywall.cta.subscribe" = "Mulai sekarang";
+"onboarding_v2.paywall.cta.restore" = "Pulihkan Pembelian";
+"onboarding_v2.paywall.legal.terms" = "Syarat";
+"onboarding_v2.paywall.legal.privacy" = "Privasi";
+
+// Done
+"onboarding_v2.done.headline" = "Kamu sudah masuk.";
+"onboarding_v2.done.subtitle" = "Feed kamu siap. Waktunya temukan 100x berikutnya.";
+"onboarding_v2.done.cta" = "Buka MemeAI";
+
+// MARK: - Home
+"home.trending_now" = "Trending sekarang 🔥";
+"home.time_range" = "Rentang waktu: %@";
+"home.column.market_cap" = "Kapitalisasi Pasar";
+"home.column.price" = "Harga";
+"home.watchlist.empty_title" = "Daftar Pantauan Anda Kosong";
+"home.watchlist.empty_subtitle" = "Simpan koin favorit Anda untuk memantaunya di sini.";
+
+// MARK: - News
+"news.see_more" = "Lihat selengkapnya";
+"news.read_full_article" = "Baca Artikel Lengkap";
+
+// MARK: - AI Chat
+"chat.empty.title" = "Ngobrol dengan AI pribadi Anda!";
+"chat.empty.subtitle" = "Pahami grafik apa pun dengan bantuan Analisis Grafik AI! Ambil foto grafik dan dapatkan informasi serta detail secara instan.";
+"chat.photo_source.title" = "Pilih Sumber Foto";
+"chat.photo_source.from_photos" = "Dari Foto";
+"chat.photo_source.take_photo" = "Ambil Foto";
+"chat.input.placeholder" = "Ketik di sini...";
+"chat.message.error" = "Kesalahan: %@";
+"chat.message.retry" = "Coba lagi";
+
+// MARK: - Coin Price Chart
+"chart.no_data" = "Tidak ada data tersedia untuk koin ini";
+
+// MARK: - Fear & Greed Indicator
+"fear_greed.title" = "Ketakutan & Keserakahan";
+"fear_greed.extreme_fear" = "Ketakutan Ekstrem";
+"fear_greed.fear" = "Ketakutan";
+"fear_greed.greed" = "Keserakahan";
+"fear_greed.extreme_greed" = "Keserakahan Ekstrem";
+
+// MARK: - Coin Analysis
+"analysis.general_trend" = "Tren Umum";
+"analysis.chart_pattern" = "Pola Grafik";
+"analysis.indicator_analysis" = "Analisis Indikator";
+"analysis.future_prediction" = "Prediksi Pasar ke Depan";
+
+// MARK: - Coin Data
+"coin.details" = "Detail";
+"coin.no_description" = "Tidak ada deskripsi tersedia untuk koin ini.";
+"coin.read_more" = "Baca Selengkapnya";
+"coin.view_less" = "Tampilkan Lebih Sedikit";
+"coin.share" = "Bagikan";
+"coin.get_analysis" = "Dapatkan Analisis";
+"coin.statistics" = "Statistik";
+
+// Stats tiles
+"coin.stat.rank" = "peringkat";
+"coin.stat.market_cap" = "kapitalisasi pasar";
+"coin.stat.volume" = "volume";
+"coin.stat.total_supply" = "total pasokan";
+"coin.stat.added_date" = "tanggal ditambahkan";
+
+// Links
+"coin.link.website" = "Situs Web";
+"coin.link.twitter" = "Twitter";
+
+// Holders
+"coin.holders.top5_title" = "5 Pemegang Teratas";
+"coin.holders.address" = "Alamat";
+"coin.holders.balance" = "Saldo";
+"coin.holders.share_title" = "Porsi Pemegang";
+"coin.holders.top10" = "Top 10";
+"coin.holders.top50" = "Top 50";
+"coin.holders.top100" = "Top 100";
+
+// Trending posts
+"coin.trending_posts" = "Postingan Trending";
+
+// Contract
+"coin.contract.network" = "Jaringan Kontrak";
+"coin.contract.address" = "Alamat";
+"coin.contract.copy" = "salin";
+"coin.contract.copied" = "tersalin";
+
+// Trade buttons
+"coin.trade.phantom" = "Berdagang di Phantom";
+"coin.trade.uniswap" = "Berdagang di Uniswap";
+"coin.trade.raydium" = "Berdagang di Raydium";
+
+// MARK: - Widget Guide
+"widget_guide.nav_title" = "Tambah Widget Layar Utama";
+"widget_guide.close" = "Tutup";
+"widget_guide.previous" = "Sebelumnya";
+"widget_guide.next" = "Berikutnya";
+"widget_guide.done" = "Selesai";
+
+"widget_guide.step1.title" = "Tekan Lama Layar Utama";
+"widget_guide.step1.description" = "Tekan dan tahan area kosong di layar utama Anda hingga aplikasi mulai bergoyang.";
+
+"widget_guide.step2.title" = "Ketuk Tombol +";
+"widget_guide.step2.description" = "Cari tombol '+' di sudut kiri atas dan ketuk untuk membuka galeri widget.";
+
+"widget_guide.step3.title" = "Temukan Meme AI";
+"widget_guide.step3.description" = "Gulir galeri widget atau cari 'Meme AI' untuk menemukan widget kami.";
+
+"widget_guide.step4.title" = "Tambahkan Widget";
+"widget_guide.step4.description" = "Pilih ukuran widget yang Anda inginkan dan ketuk 'Tambah Widget' untuk menempatkannya di layar utama.";

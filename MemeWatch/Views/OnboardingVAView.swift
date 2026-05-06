@@ -1,7 +1,6 @@
 import SwiftUI
-import SuperwallKit
 
-struct OnboardingView: View {
+struct OnboardingVAView: View {
     private struct OnboardingInfo {
         let title: String
         let description: String
@@ -83,10 +82,10 @@ struct OnboardingView: View {
                 impactFeedback.impactOccurred()
                 withAnimation {
                     appManager.completedOnboarding()
-                    Superwall.shared.register(placement: "campaign_trigger")
                 }
+                SubscriptionManager.shared.showPaywall = true
             }) {
-                Text("Skip")
+                Text(String(localized: "onboarding.skip"))
                     .font(.custom(TextFonts.interMedium.rawValue, size: 16))
                     .foregroundColor(.gray)
                     .padding(.horizontal, 20)
@@ -180,12 +179,12 @@ struct OnboardingView: View {
                 
                 if currentOnboardingIndex == onboardingInfos.count - 1 {
                     requestReview()
-                    
+
                     withAnimation {
                         appManager.completedOnboarding()
                     }
-                    
-                    Superwall.shared.register(placement: "campaign_trigger")
+
+                    SubscriptionManager.shared.showPaywall = true
                 } else {
                     withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
                         showContent = false

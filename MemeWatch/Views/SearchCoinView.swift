@@ -1,6 +1,5 @@
 import SwiftUI
 import Combine
-import SuperwallKit
 
 final class SearchCoinViewModel: ObservableObject {
     @Published var inputText: String = ""
@@ -35,7 +34,7 @@ struct SearchCoinView: View {
             ScrollView {
                 if viewModel.coinList.isEmpty {
                     VStack {
-                        Text("Loading...")
+                        Text(String(localized: "common.loading"))
                             .font(.custom(TextFonts.interRegular.rawValue, size: 16))
                             .foregroundStyle(.black)
                         

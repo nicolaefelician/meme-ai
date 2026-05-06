@@ -6,36 +6,36 @@ struct WidgetGuideView: View {
     
     private let images = ["1", "2", "3", "4"]
     private let titles = [
-        "Long Press Home Screen",
-        "Tap the + Button", 
-        "Find Meme AI",
-        "Add Widget"
+        String(localized: "widget_guide.step1.title"),
+        String(localized: "widget_guide.step2.title"),
+        String(localized: "widget_guide.step3.title"),
+        String(localized: "widget_guide.step4.title")
     ]
     private let descriptions = [
-        "Press and hold on an empty area of your home screen until the apps start wiggling.",
-        "Look for the '+' button in the top-left corner and tap it to open the widget gallery.",
-        "Scroll through the widget gallery or search for 'Meme AI' to find our widget.",
-        "Select the widget size you prefer and tap 'Add Widget' to place it on your home screen."
+        String(localized: "widget_guide.step1.description"),
+        String(localized: "widget_guide.step2.description"),
+        String(localized: "widget_guide.step3.description"),
+        String(localized: "widget_guide.step4.description")
     ]
     
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Button("Close") {
+                Button(String(localized: "widget_guide.close")) {
                     dismiss()
                 }
                 .font(.system(size: 16, weight: .medium))
                 .foregroundColor(.blue)
-                
+
                 Spacer()
-                
-                Text("Add Home Widget")
+
+                Text(String(localized: "widget_guide.nav_title"))
                     .font(.system(size: 18, weight: .bold))
                     .foregroundColor(.black)
-                
+
                 Spacer()
-                
-                Text("Close")
+
+                Text(String(localized: "widget_guide.close"))
                     .font(.system(size: 16, weight: .medium))
                     .foregroundColor(.clear)
             }
@@ -100,7 +100,7 @@ struct WidgetGuideView: View {
                     HStack {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 14, weight: .medium))
-                        Text("Previous")
+                        Text(String(localized: "widget_guide.previous"))
                             .font(.system(size: 16, weight: .medium))
                     }
                     .foregroundColor(currentPage > 0 ? .blue : .gray)
@@ -125,7 +125,7 @@ struct WidgetGuideView: View {
                     }
                 }) {
                     HStack {
-                        Text(currentPage < 3 ? "Next" : "Done")
+                        Text(currentPage < 3 ? String(localized: "widget_guide.next") : String(localized: "widget_guide.done"))
                             .font(.system(size: 16, weight: .medium))
                         if currentPage < 3 {
                             Image(systemName: "chevron.right")
@@ -147,8 +147,4 @@ struct WidgetGuideView: View {
         .background(Color.white)
         .preferredColorScheme(.light)
     }
-}
-
-#Preview {
-    WidgetGuideView()
 }

@@ -21,7 +21,7 @@ struct FearGreedIndicator: View {
     var body: some View {
         VStack() {
             HStack {
-                Text("Fear & Greed")
+                Text(String(localized: "fear_greed.title"))
                     .font(.headline)
                     .foregroundColor(.black)
             }
@@ -81,10 +81,10 @@ struct FearGreedIndicator: View {
     
     private func fearGreedText(for value: Double) -> String {
         switch value {
-        case 0..<25: return "Extreme Fear"
-        case 25..<50: return "Fear"
-        case 50..<75: return "Greed"
-        default: return "Extreme Greed"
+        case 0..<25: return String(localized: "fear_greed.extreme_fear")
+        case 25..<50: return String(localized: "fear_greed.fear")
+        case 50..<75: return String(localized: "fear_greed.greed")
+        default:      return String(localized: "fear_greed.extreme_greed")
         }
     }
 }

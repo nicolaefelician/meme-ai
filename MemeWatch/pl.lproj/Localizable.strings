@@ -1,0 +1,283 @@
+// MARK: - Common
+"common.loading" = "Ładowanie...";
+"common.analyzing" = "Analizowanie...";
+"common.analysis_error" = "Wystąpił błąd podczas analizowania Twojej monety. Spróbuj ponownie później.";
+"common.cancel" = "Anuluj";
+
+// MARK: - Splash
+"splash.app_name" = "Meme AI";
+
+// MARK: - Paywall
+"paywall.title" = "Odblokuj Meme AI Pro";
+"paywall.subtitle" = "Uzyskaj nieograniczony dostęp do analiz AI,\naktualności na żywo i zaawansowanych wykresów.";
+
+// Features
+"paywall.feature.ai_analysis" = "Analiza wykresów i monet oparta na AI";
+"paywall.feature.news" = "Aktualności w czasie rzeczywistym z analizą nastrojów";
+"paywall.feature.charts" = "Zaawansowane wykresy cen";
+"paywall.feature.alerts" = "Priorytetowe alerty rynkowe";
+
+// Plans — %@ is replaced with the localised price string from the App Store
+"paywall.plan.monthly.label" = "Miesięczny";
+"paywall.plan.monthly.badge" = "Najpopularniejszy";
+"paywall.plan.monthly.detail" = "%@ / miesiąc";
+
+"paywall.plan.weekly.label" = "Tygodniowy";
+"paywall.plan.weekly.detail" = "%@ / tydzień";
+
+// CTAs
+"paywall.cta.subscribe" = "Subskrybuj teraz";
+"paywall.cta.restore" = "Przywróć zakupy";
+
+// Legal / errors
+"paywall.legal.disclaimer" = "Subskrypcje odnawiają się automatycznie. Anuluj w dowolnym momencie w ustawieniach App Store.";
+"paywall.error.no_subscriptions" = "Nie znaleziono aktywnych subskrypcji.";
+
+// MARK: - Premium Features Preview
+"premium.title" = "Odblokuj funkcje premium";
+"premium.cta.get_pro" = "Kup Pro";
+"premium.cta.subtitle" = "Odblokuj wszystkie funkcje premium";
+"premium.preview_coming_soon" = "Podgląd wkrótce dostępny";
+
+// MARK: - Onboarding
+"onboarding.skip" = "Pomiń";
+
+// MARK: - Onboarding V2
+
+// Shared
+"onboarding_v2.cta.continue" = "Kontynuuj";
+
+// Welcome
+"onboarding_v2.welcome.live_badge" = "NA ŻYWO · 12 847 ŚLEDZONYCH MONET";
+"onboarding_v2.welcome.headline1" = "Łap memy";
+"onboarding_v2.welcome.headline2" = "przed pompą.";
+"onboarding_v2.welcome.subtitle" = "Alerty w czasie rzeczywistym, rankingi i analiza AI — wszystko w jednej aplikacji.";
+"onboarding_v2.welcome.cta" = "Zaczynamy";
+
+// Social Proof
+"onboarding_v2.social.headline" = "Jesteś w dobrym\ntowarzystwie.";
+"onboarding_v2.social.subtitle" = "Traderzy używają MemeAI, żeby znaleźć swojego kolejnego 100x — każdego dnia.";
+"onboarding_v2.social.stat1.value" = "247K+";
+"onboarding_v2.social.stat1.label" = "Aktywnych traderów";
+"onboarding_v2.social.stat1.sub" = "Z 84 krajów";
+"onboarding_v2.social.stat2.value" = "$1.2B";
+"onboarding_v2.social.stat2.label" = "Śledzone dziennie";
+"onboarding_v2.social.stat2.sub" = "Wolumen memcoinów";
+"onboarding_v2.social.stat3.value" = "4.8★";
+"onboarding_v2.social.stat3.label" = "App Store";
+"onboarding_v2.social.stat3.sub" = "12 400 opinii";
+"onboarding_v2.social.stat4.value" = "12.8K";
+"onboarding_v2.social.stat4.label" = "Śledzonych monet";
+"onboarding_v2.social.stat4.sub" = "6 łańcuchów, na żywo";
+
+// Alerts
+"onboarding_v2.alerts.app_name" = "MemeAI";
+"onboarding_v2.alerts.headline1" = "Nigdy nie przegap\n";
+"onboarding_v2.alerts.headline_accent" = "pompy";
+"onboarding_v2.alerts.headline2" = ".";
+"onboarding_v2.alerts.subtitle" = "Otrzymuj alerty, gdy moneta skacze, wieloryby kupują lub token trafia na listing.";
+"onboarding_v2.alerts.alert1.title" = "PEPE +47% w 1h";
+"onboarding_v2.alerts.alert1.body" = "Vol +$24M. 3 portfele wielorybów kupiły w ciągu ostatnich 4 min.";
+"onboarding_v2.alerts.alert1.time" = "teraz";
+"onboarding_v2.alerts.alert2.title" = "Alert wieloryba: WIF";
+"onboarding_v2.alerts.alert2.body" = "Portfel 0x9a..3f kupił WIF za $1.2M.";
+"onboarding_v2.alerts.alert2.time" = "2m";
+"onboarding_v2.alerts.alert3.title" = "Nowy token w trendzie";
+"onboarding_v2.alerts.alert3.body" = "$BANANA na listingu od 2h, vol +8x. 184 posiadaczy.";
+"onboarding_v2.alerts.alert3.time" = "6m";
+
+// Feed
+"onboarding_v2.feed.headline1" = "Największe wzrosty,";
+"onboarding_v2.feed.headline2" = "aktualizowane ";
+"onboarding_v2.feed.headline_accent" = "na żywo.";
+"onboarding_v2.feed.subtitle" = "Sprawdź, co rośnie. Sortuj po wolumenie, holderach, wieku lub aktywności social.";
+
+// Experience
+"onboarding_v2.experience.headline" = "Jak bardzo\njesteś w grze?";
+"onboarding_v2.experience.subtitle" = "Dostosujemy feed do Twojego poziomu.";
+"onboarding_v2.experience.option1.title" = "Tylko ciekawość";
+"onboarding_v2.experience.option1.sub" = "Nowy w memach — pokaż mi podstawy";
+"onboarding_v2.experience.option2.title" = "Casual trader";
+"onboarding_v2.experience.option2.sub" = "Mam kilka monet, chcę lepsze sygnały";
+"onboarding_v2.experience.option3.title" = "Full degen";
+"onboarding_v2.experience.option3.sub" = "Aping codziennie, daj mi przewagę";
+"onboarding_v2.experience.option4.title" = "Wieloryb / pro";
+"onboarding_v2.experience.option4.sub" = "Wiele portfeli, zaawansowane dane";
+
+// Chains
+"onboarding_v2.chains.headline" = "Na jakich łańcuchach\ntraderujesz?";
+"onboarding_v2.chains.subtitle" = "Zaznacz wszystkie, które dotyczą Ciebie.";
+"onboarding_v2.chains.sol.sub" = "Pump.fun, Raydium";
+"onboarding_v2.chains.base.sub" = "Coinbase L2";
+"onboarding_v2.chains.eth.sub" = "Uniswap, ERC-20";
+"onboarding_v2.chains.bsc.sub" = "PancakeSwap";
+"onboarding_v2.chains.tron.sub" = "SunPump";
+"onboarding_v2.chains.all.title" = "Śledź wszystkie łańcuchy";
+"onboarding_v2.chains.all.sub" = "Zalecane";
+
+// Goals
+"onboarding_v2.goals.headline" = "Jaka będzie\nTwoja przewaga?";
+"onboarding_v2.goals.subtitle" = "Wybierz priorytety — wyświetlimy je jako pierwsze.";
+"onboarding_v2.goals.cta" = "Zbuduj mój feed";
+"onboarding_v2.goals.goal1.title" = "Łapaj pompy wcześnie";
+"onboarding_v2.goals.goal1.sub" = "Alerty wzrostów w czasie rzeczywistym";
+"onboarding_v2.goals.goal2.title" = "Śledź portfele wielorybów";
+"onboarding_v2.goals.goal2.sub" = "Zobacz, co kupują smart money";
+"onboarding_v2.goals.goal3.title" = "Odkrywaj nowe launche";
+"onboarding_v2.goals.goal3.sub" = "Trendy monety poniżej 24h";
+"onboarding_v2.goals.goal4.title" = "Obserwuj aktywność social";
+"onboarding_v2.goals.goal4.sub" = "Wzmianki na X, aktywność deweloperów";
+"onboarding_v2.goals.goal5.title" = "Śledź moje portfolio";
+"onboarding_v2.goals.goal5.sub" = "P&L we wszystkich portfelach";
+
+// Notify
+"onboarding_v2.notify.notif_time" = "teraz";
+"onboarding_v2.notify.notif_title" = "🚀 PEPE wybija";
+"onboarding_v2.notify.notif_body" = "+18% w 5 minut. Wolumen 4x średniej.";
+"onboarding_v2.notify.headline" = "Nie przegap\nnastępnego 100x.";
+"onboarding_v2.notify.subtitle" = "Włącz alerty, a powiadomimy Cię, gdy coś ruszy. Możesz dopasować, co Cię budzi.";
+"onboarding_v2.notify.cta.enable" = "Włącz alerty";
+"onboarding_v2.notify.cta.skip" = "Może później";
+
+// Analyzing
+"onboarding_v2.analyzing.headline" = "Budujemy Twój feed…";
+"onboarding_v2.analyzing.step1" = "Skanowanie 12 847 monet…";
+"onboarding_v2.analyzing.step2" = "Krzyżowe sprawdzanie topowych portfeli…";
+"onboarding_v2.analyzing.step3" = "Dopasowywanie alertów do Twoich celów…";
+"onboarding_v2.analyzing.step4" = "Budowanie Twojego personalnego feedu…";
+
+// Reviews
+"onboarding_v2.reviews.rating_sub" = "Na podstawie 12 400+ opinii w App Store";
+"onboarding_v2.reviews.headline" = "Traderzy\nzarabiają.";
+"onboarding_v2.reviews.review1.title" = "Złapałem 40x dzięki tej apce";
+"onboarding_v2.reviews.review1.body" = "MemeAI powiadomił mnie w sekundę, gdy BONK zaczął rosnąć. Spałbym przez to. Ta apka dosłownie zwraca za siebie.";
+"onboarding_v2.reviews.review2.title" = "Zastąpiła 4 inne aplikacje";
+"onboarding_v2.reviews.review2.body" = "Śledzenie wielorybów + alerty + portfolio w jednym miejscu. Jakość sygnałów jest niesamowita.";
+"onboarding_v2.reviews.review3.title" = "Najlepsza apka w App Store";
+"onboarding_v2.reviews.review3.body" = "Jestem +12k w tym miesiącu tylko dzięki alertom. UI czysty, dane szybkie. Bez uwag.";
+
+// Paywall V2
+"onboarding_v2.paywall.badge" = "MemeAI PRO";
+"onboarding_v2.paywall.headline" = "Odblokuj\npełną przewagę.";
+"onboarding_v2.paywall.subtitle" = "Anuluj w każdej chwili. Bez ukrytych opłat.";
+"onboarding_v2.paywall.feature1" = "Nieograniczone alerty w czasie rzeczywistym";
+"onboarding_v2.paywall.feature2" = "Analiza wykresów AI";
+"onboarding_v2.paywall.feature3" = "Feed odkryć nowych tokenów";
+"onboarding_v2.paywall.feature4" = "Zaawansowane wykresy i dane on-chain";
+"onboarding_v2.paywall.feature5" = "Priorytetowe wsparcie";
+"onboarding_v2.paywall.plan.weekly.title" = "Tygodniowy";
+"onboarding_v2.paywall.plan.weekly.detail" = "Rozliczane %@/tydzień";
+"onboarding_v2.paywall.plan.weekly.period" = "/tydz";
+"onboarding_v2.paywall.plan.weekly.badge" = "POPULARNY";
+"onboarding_v2.paywall.plan.monthly.title" = "Miesięczny";
+"onboarding_v2.paywall.plan.monthly.detail" = "Rozliczane %@/miesiąc";
+"onboarding_v2.paywall.plan.monthly.period" = "/mies";
+"onboarding_v2.paywall.cta.subscribe" = "Zacznij teraz";
+"onboarding_v2.paywall.cta.restore" = "Przywróć zakup";
+"onboarding_v2.paywall.legal.terms" = "Regulamin";
+"onboarding_v2.paywall.legal.privacy" = "Prywatność";
+
+// Done
+"onboarding_v2.done.headline" = "Jesteś w środku.";
+"onboarding_v2.done.subtitle" = "Twój feed jest gotowy. Czas znaleźć tego 100x.";
+"onboarding_v2.done.cta" = "Otwórz MemeAI";
+
+// MARK: - Home
+"home.trending_now" = "Trendy teraz 🔥";
+"home.time_range" = "Zakres czasu: %@";
+"home.column.market_cap" = "Kapitalizacja rynku";
+"home.column.price" = "Cena";
+"home.watchlist.empty_title" = "Twoja lista obserwowanych jest pusta";
+"home.watchlist.empty_subtitle" = "Zapisz ulubione monety, aby śledzić je tutaj.";
+
+// MARK: - News
+"news.see_more" = "Zobacz więcej";
+"news.read_full_article" = "Czytaj cały artykuł";
+
+// MARK: - AI Chat
+"chat.empty.title" = "Porozmawiaj ze swoim osobistym AI!";
+"chat.empty.subtitle" = "Zrozum dowolny wykres dzięki analizie wykresów AI! Zrób zdjęcie wykresu i uzyskaj natychmiastowe informacje oraz szczegóły.";
+"chat.photo_source.title" = "Wybierz źródło zdjęcia";
+"chat.photo_source.from_photos" = "Ze zdjęć";
+"chat.photo_source.take_photo" = "Zrób zdjęcie";
+"chat.input.placeholder" = "Wpisz tutaj...";
+"chat.message.error" = "Błąd: %@";
+"chat.message.retry" = "Spróbuj ponownie";
+
+// MARK: - Coin Price Chart
+"chart.no_data" = "Brak dostępnych danych dla tej monety";
+
+// MARK: - Fear & Greed Indicator
+"fear_greed.title" = "Strach i chciwość";
+"fear_greed.extreme_fear" = "Skrajny strach";
+"fear_greed.fear" = "Strach";
+"fear_greed.greed" = "Chciwość";
+"fear_greed.extreme_greed" = "Skrajna chciwość";
+
+// MARK: - Coin Analysis
+"analysis.general_trend" = "Ogólny trend";
+"analysis.chart_pattern" = "Wzorzec wykresu";
+"analysis.indicator_analysis" = "Analiza wskaźników";
+"analysis.future_prediction" = "Prognoza rynku";
+
+// MARK: - Coin Data
+"coin.details" = "Szczegóły";
+"coin.no_description" = "Brak opisu dla tej monety.";
+"coin.read_more" = "Czytaj więcej";
+"coin.view_less" = "Pokaż mniej";
+"coin.share" = "Udostępnij";
+"coin.get_analysis" = "Uzyskaj analizę";
+"coin.statistics" = "Statystyki";
+
+// Stats tiles
+"coin.stat.rank" = "ranking";
+"coin.stat.market_cap" = "kapitalizacja rynku";
+"coin.stat.volume" = "wolumen";
+"coin.stat.total_supply" = "całkowita podaż";
+"coin.stat.added_date" = "data dodania";
+
+// Links
+"coin.link.website" = "Strona internetowa";
+"coin.link.twitter" = "Twitter";
+
+// Holders
+"coin.holders.top5_title" = "Top 5 posiadaczy";
+"coin.holders.address" = "Adres";
+"coin.holders.balance" = "Saldo";
+"coin.holders.share_title" = "Udział posiadaczy";
+"coin.holders.top10" = "Top 10";
+"coin.holders.top50" = "Top 50";
+"coin.holders.top100" = "Top 100";
+
+// Trending posts
+"coin.trending_posts" = "Popularne posty";
+
+// Contract
+"coin.contract.network" = "Sieć kontraktu";
+"coin.contract.address" = "Adres";
+"coin.contract.copy" = "kopiuj";
+"coin.contract.copied" = "skopiowano";
+
+// Trade buttons
+"coin.trade.phantom" = "Handluj na Phantom";
+"coin.trade.uniswap" = "Handluj na Uniswap";
+"coin.trade.raydium" = "Handluj na Raydium";
+
+// MARK: - Widget Guide
+"widget_guide.nav_title" = "Dodaj widget na ekran główny";
+"widget_guide.close" = "Zamknij";
+"widget_guide.previous" = "Poprzedni";
+"widget_guide.next" = "Następny";
+"widget_guide.done" = "Gotowe";
+
+"widget_guide.step1.title" = "Przytrzymaj ekran główny";
+"widget_guide.step1.description" = "Naciśnij i przytrzymaj puste miejsce na ekranie głównym, aż aplikacje zaczną się poruszać.";
+
+"widget_guide.step2.title" = "Stuknij przycisk +";
+"widget_guide.step2.description" = "Znajdź przycisk '+' w lewym górnym rogu i stuknij go, aby otworzyć galerię widgetów.";
+
+"widget_guide.step3.title" = "Znajdź Meme AI";
+"widget_guide.step3.description" = "Przewiń galerię widgetów lub wyszukaj 'Meme AI', aby znaleźć nasz widget.";
+
+"widget_guide.step4.title" = "Dodaj widget";
+"widget_guide.step4.description" = "Wybierz preferowany rozmiar widgetu i stuknij 'Dodaj widget', aby umieścić go na ekranie głównym.";

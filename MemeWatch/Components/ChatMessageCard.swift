@@ -93,10 +93,10 @@ struct ChatMessageCard: View {
                 }
                 
                 if let error = responseError {
-                    Text("Error: \(error)")
+                    Text(String(format: String(localized: "chat.message.error"), error))
                         .foregroundStyle(.red)
                         .multilineTextAlignment(.leading)
-                    
+
                     Button(action: {
                         retryCallback(messageRow)
                     }) {
@@ -104,8 +104,8 @@ struct ChatMessageCard: View {
                             Image(systemName: "arrow.clockwise")
                                 .foregroundStyle(.white)
                                 .frame(width: 16, height: 16)
-                            
-                            Text("Try again")
+
+                            Text(String(localized: "chat.message.retry"))
                                 .foregroundStyle(.white)
                         }
                     }

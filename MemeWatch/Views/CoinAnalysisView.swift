@@ -6,7 +6,7 @@ struct CoinAnalysisView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                Text("General Trend")
+                Text(String(localized: "analysis.general_trend"))
                     .font(.custom(TextFonts.instrumentSansSemiBold.rawValue, size: 25))
                     .foregroundStyle(.black)
                     .padding(.top, 15)
@@ -17,7 +17,7 @@ struct CoinAnalysisView: View {
                     .multilineTextAlignment(.leading)
                     .padding(.top, 10)
                 
-                Text("Chart Pattern")
+                Text(String(localized: "analysis.chart_pattern"))
                     .font(.custom(TextFonts.instrumentSansSemiBold.rawValue, size: 25))
                     .foregroundStyle(.black)
                     .padding(.top, 30)
@@ -28,7 +28,7 @@ struct CoinAnalysisView: View {
                     .multilineTextAlignment(.leading)
                     .padding(.top, 10)
                 
-                Text("Indicator Analysis")
+                Text(String(localized: "analysis.indicator_analysis"))
                     .font(.custom(TextFonts.instrumentSansSemiBold.rawValue, size: 25))
                     .foregroundStyle(.black)
                     .padding(.top, 30)
@@ -39,7 +39,7 @@ struct CoinAnalysisView: View {
                     .multilineTextAlignment(.leading)
                     .padding(.top, 10)
                 
-                Text("Future Market Prediction")
+                Text(String(localized: "analysis.future_prediction"))
                     .font(.custom(TextFonts.instrumentSansSemiBold.rawValue, size: 25))
                     .foregroundStyle(.black)
                     .padding(.top, 30)
