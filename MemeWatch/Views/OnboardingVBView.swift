@@ -50,7 +50,7 @@ struct OnboardingVBView: View {
             case .reviews:
                 V2ReviewsScreen(accent: accent) {
                     requestReview()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: advance)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: advance)
                 }
             case .paywall:
                 V2PaywallScreen(
@@ -189,7 +189,10 @@ private struct V2WelcomeScreen: View {
 
                 // CTA
                 VStack(spacing: 14) {
-                    Button(action: onContinue) {
+                    Button {
+                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                        onContinue()
+                    } label: {
                         Text(String(localized: "onboarding_v2.welcome.cta"))
                             .font(.system(size: 17, weight: .bold))
                             .foregroundColor(Color(hex: "#0a0a0b"))
@@ -758,7 +761,10 @@ private struct V2ExperienceScreen: View {
             Spacer()
 
             // Continue — disabled until a selection is made
-            Button(action: onContinue) {
+            Button {
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                onContinue()
+            } label: {
                 Text(String(localized: "onboarding_v2.cta.continue"))
                     .font(.system(size: 17, weight: .bold))
                     .foregroundColor(selected != nil ? Color(hex: "#0a0a0b") : .white.opacity(0.3))
@@ -790,7 +796,10 @@ private struct OptionCard: View {
     let action: () -> Void
 
     var body: some View {
-        Button(action: action) {
+        Button {
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            action()
+        } label: {
             HStack(spacing: 14) {
                 // Icon box
                 ZStack {
@@ -916,7 +925,10 @@ private struct V2ChainsScreen: View {
 
             Spacer()
 
-            Button(action: onContinue) {
+            Button {
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                onContinue()
+            } label: {
                 Text(String(localized: "onboarding_v2.cta.continue"))
                     .font(.system(size: 17, weight: .bold))
                     .foregroundColor(selected.isEmpty ? .white.opacity(0.3) : Color(hex: "#0a0a0b"))
@@ -950,7 +962,10 @@ private struct ChainOptionCard: View {
     let action: () -> Void
 
     var body: some View {
-        Button(action: action) {
+        Button {
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            action()
+        } label: {
             HStack(spacing: 14) {
                 // Icon box
                 ZStack {
@@ -1082,7 +1097,10 @@ private struct V2GoalsScreen: View {
 
             Spacer()
 
-            Button(action: onContinue) {
+            Button {
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                onContinue()
+            } label: {
                 Text(String(localized: "onboarding_v2.goals.cta"))
                     .font(.system(size: 17, weight: .bold))
                     .foregroundColor(selected.isEmpty ? .white.opacity(0.3) : Color(hex: "#0a0a0b"))
@@ -1189,13 +1207,19 @@ private struct V2NotifyScreen: View {
 
                 // Buttons
                 VStack(spacing: 14) {
-                    Button(action: onContinue) {
+                    Button {
+                        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                        onContinue()
+                    } label: {
                         Text(String(localized: "onboarding_v2.notify.cta.skip"))
                             .font(.system(size: 14, weight: .semibold))
                             .foregroundColor(.white.opacity(0.4))
                     }
 
-                    Button(action: requestAndContinue) {
+                    Button {
+                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                        requestAndContinue()
+                    } label: {
                         Text(String(localized: "onboarding_v2.notify.cta.enable"))
                             .font(.system(size: 17, weight: .bold))
                             .foregroundColor(Color(hex: "#0a0a0b"))
@@ -1567,7 +1591,10 @@ private struct V2PaywallScreen: View {
                     }
 
                     // CTA button
-                    Button(action: handlePurchase) {
+                    Button {
+                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                        handlePurchase()
+                    } label: {
                         ZStack {
                             if isPurchasing {
                                 ProgressView()
@@ -1608,7 +1635,7 @@ private struct V2PaywallScreen: View {
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 26)
-                .padding(.bottom, 20)
+                .padding(.bottom, 10)
                 .background(
                     // Fade-up blur so content beneath doesn't hard-cut
                     LinearGradient(
@@ -1692,7 +1719,10 @@ private struct PlanCard: View {
     let action: () -> Void
 
     var body: some View {
-        Button(action: action) {
+        Button {
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            action()
+        } label: {
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(title)
@@ -1783,7 +1813,10 @@ private struct V2DoneScreen: View {
 
             Spacer()
 
-            Button(action: onContinue) {
+            Button {
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                onContinue()
+            } label: {
                 Text(String(localized: "onboarding_v2.done.cta"))
                     .font(.system(size: 17, weight: .bold))
                     .foregroundColor(Color(hex: "#0a0a0b"))
@@ -1828,7 +1861,10 @@ private struct ContinueButton: View {
     let action: () -> Void
 
     var body: some View {
-        Button(action: action) {
+        Button {
+            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+            action()
+        } label: {
             Text(String(localized: "onboarding_v2.cta.continue"))
                 .font(.system(size: 17, weight: .bold))
                 .foregroundColor(Color(hex: "#0a0a0b"))
