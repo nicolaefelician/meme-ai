@@ -623,10 +623,6 @@ private struct FeedCoinRow: View {
 
             Spacer()
 
-            // Sparkline
-            SparklineView(up: entry.up, color: entry.up ? Color(hex: "#22c55e") : Color(hex: "#ef4444"))
-                .frame(width: 64, height: 36)
-
             // Price + pct
             VStack(alignment: .trailing, spacing: 2) {
                 Text(entry.price)
@@ -636,6 +632,10 @@ private struct FeedCoinRow: View {
                     .font(.system(size: 12, weight: .bold))
                     .foregroundColor(entry.up ? Color(hex: "#22c55e") : Color(hex: "#ef4444"))
             }
+            
+            // Sparkline
+            SparklineView(up: entry.up, color: entry.up ? Color(hex: "#22c55e") : Color(hex: "#ef4444"))
+                .frame(width: 64, height: 36)
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 12)
@@ -1486,6 +1486,7 @@ private struct V2PaywallScreen: View {
     @State private var isRestoring = false
     @State private var errorMessage: String?
     @State private var appeared = false
+    @State private var showSkip = false
 
     private var features: [String] {[
         String(localized: "onboarding_v2.paywall.feature1"),
@@ -1506,6 +1507,13 @@ private struct V2PaywallScreen: View {
             )
             .ignoresSafeArea()
             .offset(y: -100)
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                    withAnimation(.easeIn(duration: 0.4)) {
+                        showSkip = true
+                    }
+                }
+            }
 
             // Scrollable content — badge, headline, features
             ScrollView(showsIndicators: false) {
@@ -1647,6 +1655,20 @@ private struct V2PaywallScreen: View {
                     .padding(.top, -40)
                 )
             }
+            
+            Button(action: onSkip) {
+                ZStack {
+                    Circle()
+                        .fill(Color.white.opacity(0.15))
+                        .frame(width: 36, height: 36)
+                    Image(systemName: "xmark")
+                        .font(.system(size: 13, weight: .bold))
+                        .foregroundColor(.white)
+                }
+            }
+            .opacity(showSkip ? 1 : 0)
+            .padding(.top, 56)
+            .padding(.trailing, 20)
         }
         .onAppear {
             selectedPackage = subscriptionManager.weeklyPackage ?? subscriptionManager.monthlyPackage
