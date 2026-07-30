@@ -1,9 +1,11 @@
 import SwiftUI
 import StoreKit
+import RevenueCatUI
 
 struct SettingsView: View {
     @State private var isSharing = false
     @State private var showWidgetGuide = false
+    @State private var showCustomerCenter = false
     @Environment(\.requestReview) var requestReview
     @ObservedObject private var appManager = AppManager.shared
     
@@ -43,6 +45,9 @@ struct SettingsView: View {
                     Divider().background(Color.gray.opacity(0.4)).padding(.horizontal, 20)
                     
                     sectionHeader(title: "Legal")
+                    settingButton(icon: "person.crop.circle.badge.questionmark", title: "Manage Subscription") {
+                        showCustomerCenter = true
+                    }
                     settingButton(icon: "dollarsign.arrow.circlepath", title: "Restore Purchase") {
                         restorePurchases()
                     }
@@ -70,6 +75,7 @@ struct SettingsView: View {
         .sheet(isPresented: $showWidgetGuide) {
             WidgetGuideView()
         }
+        .presentCustomerCenter(isPresented: $showCustomerCenter)
     }
     
     private func restorePurchases() {

@@ -16,6 +16,7 @@
 		814FC86F2DE0296600625CEA /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 814FC86E2DE0296600625CEA /* FirebaseMessaging */; };
 		819AE5702FAB428C00C43BE0 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 819AE56F2FAB428C00C43BE0 /* FirebaseCrashlytics */; };
 		819AE5722FAB429500C43BE0 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 819AE5712FAB429500C43BE0 /* FirebaseRemoteConfig */; };
+		81A8BD1D301BD07600BEC252 /* RevenueCatUI in Frameworks */ = {isa = PBXBuildFile; productRef = 81A8BD1C301BD07600BEC252 /* RevenueCatUI */; };
 		81E783DB2E2A6BFA00CF044C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81E783DA2E2A6BFA00CF044C /* WidgetKit.framework */; };
 		81E783DD2E2A6BFA00CF044C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81E783DC2E2A6BFA00CF044C /* SwiftUI.framework */; };
 		81E783EE2E2A6BFB00CF044C /* CoinInfoWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 81E783D92E2A6BFA00CF044C /* CoinInfoWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -106,6 +107,7 @@
 				3F3B07D89B15D843B890D8F8 /* Pods_MemeWatch.framework in Frameworks */,
 				819AE5702FAB428C00C43BE0 /* FirebaseCrashlytics in Frameworks */,
 				814FC86D2DE0296600625CEA /* FirebaseCrashlytics in Frameworks */,
+				81A8BD1D301BD07600BEC252 /* RevenueCatUI in Frameworks */,
 				814FC8692DE0296600625CEA /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -453,7 +455,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MemeWatch/MemeWatch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"MemeWatch/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
@@ -473,7 +475,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.9;
+				MARKETING_VERSION = 1.0.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pileus.meme.ai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -490,7 +492,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MemeWatch/MemeWatch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"MemeWatch/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
@@ -510,7 +512,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.9;
+				MARKETING_VERSION = 1.0.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pileus.meme.ai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -663,6 +665,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 814FC8672DE0296600625CEA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfig;
+		};
+		81A8BD1C301BD07600BEC252 /* RevenueCatUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 814FC8612DE028D200625CEA /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
+			productName = RevenueCatUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
