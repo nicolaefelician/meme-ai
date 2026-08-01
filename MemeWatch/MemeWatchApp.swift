@@ -14,6 +14,10 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
 
         SubscriptionManager.shared.fetchSubscriptionStatus()
         SubscriptionManager.shared.listenForSubscriptionUpdates()
+        
+        if let instanceID = AnalyticsManager.shared.firebaseAppInstanceID {
+            Purchases.shared.attribution.setFirebaseAppInstanceID(instanceID)
+        }
 
         UNUserNotificationCenter.current().delegate = self
         Messaging.messaging().delegate = self

@@ -17,4 +17,8 @@ final class AnalyticsManager {
     func setUserProperty(value: String?, property: String) {
         Analytics.setUserProperty(value, forName: property)
     }
+    
+    var firebaseAppInstanceID: String? {
+        Analytics.appInstanceID()
+    }
 }
