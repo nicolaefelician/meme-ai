@@ -33,15 +33,20 @@ struct SearchCoinView: View {
         ZStack {
             ScrollView {
                 if viewModel.coinList.isEmpty {
-                    VStack {
-                        Text(String(localized: "common.loading"))
+                    VStack(spacing: 12) {
+                        Image(systemName: "magnifyingglass")
+                            .font(.system(size: 40))
+                            .foregroundStyle(.gray)
+                        Text(String(localized: "search.empty.title"))
                             .font(.custom(TextFonts.interRegular.rawValue, size: 16))
-                            .foregroundStyle(.black)
-                        
-                        ProgressView()
-                            .foregroundStyle(.black)
+                            .foregroundStyle(.gray)
+                        Text(String(localized: "search.empty.subtitle"))
+                            .font(.custom(TextFonts.interRegular.rawValue, size: 13))
+                            .foregroundStyle(.gray.opacity(0.7))
+                            .multilineTextAlignment(.center)
                     }
-                    .padding(.top, 10)
+                    .padding(.top, 60)
+                    .padding(.horizontal, 24)
                 } else {
                     VStack(spacing: 13) {
                         ForEach(viewModel.coinList, id: \.self) { coin in

@@ -182,6 +182,10 @@
 "onboarding_v2.done.subtitle" = "Feed kamu siap. Waktunya temukan 100x berikutnya.";
 "onboarding_v2.done.cta" = "Buka MemeAI";
 
+// MARK: - Search
+"search.empty.title" = "Koin tidak ditemukan";
+"search.empty.subtitle" = "Coba cari berdasarkan nama, simbol, atau alamat kontrak.";
+
 // MARK: - Home
 "home.trending_now" = "Trending sekarang 🔥";
 "home.time_range" = "Rentang waktu: %@";

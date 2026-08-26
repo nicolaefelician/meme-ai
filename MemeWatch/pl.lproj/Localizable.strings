@@ -182,6 +182,10 @@
 "onboarding_v2.done.subtitle" = "Twój feed jest gotowy. Czas znaleźć tego 100x.";
 "onboarding_v2.done.cta" = "Otwórz MemeAI";
 
+// MARK: - Search
+"search.empty.title" = "Nie znaleziono monet";
+"search.empty.subtitle" = "Spróbuj wyszukać po nazwie, symbolu lub adresie kontraktu.";
+
 // MARK: - Home
 "home.trending_now" = "Trendy teraz 🔥";
 "home.time_range" = "Zakres czasu: %@";

@@ -182,6 +182,10 @@
 "onboarding_v2.done.subtitle" = "Your feed's ready. Time to find that 100x.";
 "onboarding_v2.done.cta" = "Open MemeAI";
 
+// MARK: - Search
+"search.empty.title" = "No coins found";
+"search.empty.subtitle" = "Try searching for a name, symbol, or contract address.";
+
 // MARK: - Home
 "home.trending_now" = "Trending now 🔥";
 "home.time_range" = "Time range: %@";

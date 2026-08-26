@@ -30,10 +30,18 @@ final class CoinListApi {
     
     private struct SearchApiResponse: Decodable {
         let data: DataResponse
-        
+
         struct DataResponse: Decodable {
-            let pairs: [Coin]
+            let tks: [Coin]
         }
+    }
+
+    private struct DexCoinListApiResponse: Decodable, Sendable {
+        struct ResponseData: Decodable, Sendable {
+            let total: Int
+            let tks: [Coin]
+        }
+        let data: ResponseData
     }
     
     private struct RecentlyAddedApiResponse: Decodable, Sendable {
@@ -165,25 +173,18 @@ final class CoinListApi {
     }
     
     func searchCoins(query: String) async -> [Coin] {
-        guard let url = URL(string: "https://api.coinmarketcap.com/dexer/v3/dexer/search/main-site?keyword=\(query)&all=true") else { return [] }
+        guard let url = URL(string: "https://dapi.coinmarketcap.com/dex/v1/search?q=\(query)") else { return [] }
         
         do {
             let (data, _) = try await safeSession().data(from: url)
             
             let decoded = try JSONDecoder().decode(SearchApiResponse.self, from: data)
-            
-            let filteredList = decoded.data.pairs.filter { coin in
-                return coin.id != 0
-            }
-            
+
             var seenIds = Set<Int>()
-            let uniqueFilteredList = filteredList.filter { coin in
-                if seenIds.contains(coin.id) {
-                    return false
-                } else {
-                    seenIds.insert(coin.id)
-                    return true
-                }
+            let uniqueFilteredList = decoded.data.tks.filter { coin in
+                guard !seenIds.contains(coin.id) else { return false }
+                seenIds.insert(coin.id)
+                return true
             }
             
             return uniqueFilteredList

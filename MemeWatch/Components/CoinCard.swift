@@ -29,6 +29,7 @@ struct CoinCard: View {
                 Text(coin.symbol)
                     .font(.custom(TextFonts.instrumentSansSemiBold.rawValue, size: 18))
                     .foregroundStyle(.black)
+                    .lineLimit(1)
                 
                 let marketCap = coin.marketCap != 0.0 ? coin.marketCap : coin.selfReportedMarketCap
                 

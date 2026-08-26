@@ -112,14 +112,14 @@ struct HomeView: View {
                         .scaledToFit()
                         .frame(width: 220)
                 }
-                .padding(.leading, 18)
+                .padding(.leading, 22)
                 
                 Text(String(localized: "home.trending_now"))
                     .padding(.top, 5)
                     .font(.custom(TextFonts.instrumentSansSemiBold.rawValue, size: 23))
                     .foregroundStyle(.black)
                     .fontWeight(.medium)
-                    .padding(.horizontal, 16)
+                    .padding(.horizontal, 22)
                 
                 if viewModel.isLoading {
                     HStack {
@@ -133,7 +133,7 @@ struct HomeView: View {
                         HStack(spacing: 0) {
                             Rectangle()
                                 .foregroundStyle(.clear)
-                                .frame(width: 18)
+                                .frame(width: 26)
                             
                             LazyHStack(spacing: 20) {
                                 ForEach(appManager.losersCoinsList, id: \.self) { coin in
@@ -154,7 +154,7 @@ struct HomeView: View {
                             
                             Rectangle()
                                 .foregroundStyle(.clear)
-                                .frame(width: 18)
+                                .frame(width: 26)
                         }
                     }
                     .frame(height: 60)
@@ -191,9 +191,8 @@ struct HomeView: View {
                             .frame(width: 26, height: 26)
                     }
                 }
-                .padding(.horizontal, 18)
+                .padding(.horizontal, 26)
                 .padding(.top, 10)
-                .padding(.bottom, 5)
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 17) {
@@ -213,10 +212,9 @@ struct HomeView: View {
                             .foregroundStyle(.clear)
                             .frame(width: 1)
                     }
+                    .padding(.horizontal, 11)
                 }
-                .frame(height: 22)
-                .padding(.vertical, 15)
-                .padding(.bottom, 7)
+                .padding(.bottom, 5)
                 
                 HStack {
                     Text(String(localized: "home.column.market_cap"))
@@ -236,7 +234,7 @@ struct HomeView: View {
                         .foregroundStyle(.gray)
                         .padding(.leading, 17)
                 }
-                .padding(.horizontal, 18)
+                .padding(.horizontal, 26)
                 
                 LazyVStack(spacing: 13) {
                     if viewModel.selctedCoinCategory == .watchList && getCoinList().isEmpty {
@@ -291,7 +289,7 @@ struct HomeView: View {
                     }
                 }
                 .padding(.top, 5)
-                .padding(.horizontal, 18)
+                .padding(.horizontal, 26)
                 .padding(.bottom, 20)
             }
         }

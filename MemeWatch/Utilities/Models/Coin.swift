@@ -58,6 +58,17 @@ final class Coin: Decodable, Identifiable, Hashable, Sendable, Equatable, CoinIn
     private enum BaseTokenKeys: String, CodingKey {
         case id
     }
+
+    private enum DexTokenKeys: String, CodingKey {
+        case id = "plti"
+        case name = "n"
+        case symbol = "s"
+        case price = "pu"
+        case priceChange24h = "pc24h"
+        case volume24h = "v24h"
+        case marketCap = "mc"
+        case selfReportedMarketCap = "ssc"
+    }
     
     func buildPriceChangeText(_ timeRange: TimeRange) -> AnyView {
         var priceChangePercentage: Double = 0.0
@@ -136,6 +147,31 @@ final class Coin: Decodable, Identifiable, Hashable, Sendable, Equatable, CoinIn
             self.marketCap = marketCap ?? 0.0
             self.selfReportedMarketCap = selfReportedMarketCap ?? 0.0
         } catch {
+            if let container = try? decoder.container(keyedBy: DexTokenKeys.self),
+               let _ = try? container.decodeIfPresent(Int.self, forKey: .id) {
+                let id = (try? container.decode(Int.self, forKey: .id)) ?? 0
+                let name = (try? container.decode(String.self, forKey: .name)) ?? ""
+                let symbol = (try? container.decode(String.self, forKey: .symbol)) ?? ""
+                let priceStr = (try? container.decode(String.self, forKey: .price)) ?? "0"
+                let pc24hStr = (try? container.decode(String.self, forKey: .priceChange24h)) ?? "0"
+                let v24hStr = (try? container.decode(String.self, forKey: .volume24h)) ?? "0"
+                let mcStr = (try? container.decode(String.self, forKey: .marketCap)) ?? "0"
+                let sscStr = (try? container.decode(String.self, forKey: .selfReportedMarketCap)) ?? "0"
+
+                self.id = id
+                self.name = name
+                self.symbol = symbol
+                self.price = Double(priceStr) ?? 0.0
+                self.priceChange24h = Double(pc24hStr) ?? 0.0
+                self.volume24h = Double(v24hStr) ?? 0.0
+                self.marketCap = Double(mcStr) ?? 0.0
+                self.selfReportedMarketCap = Double(sscStr) ?? 0.0
+                self.priceChange1h = nil
+                self.priceChange7d = nil
+                self.priceChange30d = nil
+                return
+            }
+
             let container = try decoder.container(keyedBy: PairKeys.self)
             let baseTokenContainer = try container.nestedContainer(keyedBy: BaseTokenKeys.self, forKey: .baseToken)
             
